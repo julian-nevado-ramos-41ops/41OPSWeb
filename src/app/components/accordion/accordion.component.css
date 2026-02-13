@@ -1,0 +1,197 @@
+/* ============================================
+   HOST — Shared base styles
+   ============================================ */
+:host {
+    display: block;
+    width: 100%;
+}
+
+:host(.scroll-snap) {
+    scroll-snap-align: start;
+}
+
+/* ============================================
+   CLICK MODE
+   ============================================ */
+:host(.mode-click) {
+    display: flex;
+    margin: 0 auto;
+}
+
+/* ============================================
+   SCROLL MODE — Section & Sticky Wrapper
+   ============================================ */
+.scroll-section {
+    position: relative;
+    width: 100%;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================
+   SCROLL MODE — Cards Container
+   ============================================ */
+.scroll-cards-container {
+    display: flex;
+    justify-content: center;
+    transition: width 0.1s ease-out;
+    font-family: var(--sa-font, 'Helvetica Neue', 'Arial', sans-serif);
+    color: var(--sa-text-color, #ffffff);
+    height: 70vh;
+}
+
+/* ============================================
+   SCROLL MODE — Card
+   ============================================ */
+.scroll-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    background: #0d0d0d;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Expanded card */
+.scroll-card.expanded {
+    flex: 8;
+}
+
+/* Collapsed card */
+.scroll-card.collapsed {
+    flex: 1;
+    background: #111;
+    align-items: center;
+    justify-content: center;
+}
+
+.scroll-card.collapsed:hover {
+    background: #1a1a1a;
+}
+
+/* ============================================
+   SCROLL MODE — Card Content
+   ============================================ */
+.card-content {
+    padding: 40px 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    max-width: 800px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.scroll-card.collapsed .card-content {
+    display: none;
+}
+
+.card-content h2 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem 0;
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
+    color: #ffffff;
+}
+
+.scroll-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.scroll-card-description {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.7;
+    margin: 0;
+    white-space: pre-wrap;
+    /* Para respetar los saltos de línea \n */
+}
+
+/* ============================================
+   SCROLL MODE — Vertical Title (collapsed)
+   ============================================ */
+.vertical-title {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform-origin: 0 50%;
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #ffffff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* When collapsed and NO card is expanded → show title normally at bottom */
+.scroll-card.collapsed.no-expanded .vertical-title {
+    opacity: 1;
+    transform: none;
+    left: 30px;
+    bottom: 30px;
+}
+
+/* When collapsed and ANOTHER card is expanded → show vertical title */
+.scroll-card.collapsed:not(.no-expanded) .vertical-title {
+    opacity: 1;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+    :host(.mode-click) {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .scroll-cards-container {
+        flex-direction: column;
+        width: 90% !important;
+        height: auto;
+    }
+
+    .scroll-card,
+    .scroll-card.collapsed,
+    .scroll-card.expanded {
+        flex: none;
+        height: auto;
+        min-height: 150px;
+        width: 100%;
+    }
+
+    .scroll-card.expanded {
+        min-height: 350px;
+    }
+
+    .vertical-title {
+        display: none;
+    }
+
+    .scroll-card.collapsed .card-content {
+        display: flex;
+    }
+
+    .card-content {
+        padding: 30px;
+    }
+}

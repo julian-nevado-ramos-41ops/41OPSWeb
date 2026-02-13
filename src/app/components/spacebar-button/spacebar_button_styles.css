@@ -1,0 +1,93 @@
+:host {
+    display: block;
+    width: 140px;
+    height: 56px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    /* Positioning handled by parent */
+}
+
+.spacebar__button__inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+:host.is-pressed .spacebar__button__inner {
+    transform: translate(0px, 4px);
+}
+
+.spacebar__button__inner span {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+    transition: color 0.4s ease;
+}
+
+.spacebar__svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+#background-path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#button-path {
+    fill: #000;
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+:host.is-pressed #button-path {
+    transform: translate(0px, 4px);
+}
+
+:host.is-pressed #gradient {
+    transform: translate(0px, 4px);
+}
+
+#gradient-path {
+    fill: url(#gradient-gradient);
+    transition: transform 0.2s ease-out;
+}
+
+:host.is-pressed #gradient-path {
+    transform: matrix(1, 0, 0, 1, 0, 0) !important;
+    transition: transform 1.0s linear;
+}
+
+@media screen and (max-width: 768px) {
+    :host {
+        right: 1rem;
+        bottom: 1rem;
+        transform: scale(0.8);
+        transform-origin: bottom right;
+    }
+}

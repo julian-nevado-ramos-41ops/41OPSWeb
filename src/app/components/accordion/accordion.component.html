@@ -1,0 +1,37 @@
+<!-- ═══════════════════════════════════════════════════════
+     CLICK MODE: Project cards via ng-content
+     ═══════════════════════════════════════════════════════ -->
+@if (mode() === 'click') {
+<ng-content />
+}
+
+<!-- ═══════════════════════════════════════════════════════
+     SCROLL MODE: Data-driven cards with scroll animation
+     ═══════════════════════════════════════════════════════ -->
+@if (mode() === 'scroll') {
+<section class="scroll-section" [style.height]="sectionHeight()" [style.--sa-font]="fontFamily()">
+    <div class="sticky-wrapper">
+        <div class="scroll-cards-container" [style.width]="currentWidth" [style.gap]="gap()"
+            [style.--sa-radius]="borderRadius()" [style.--sa-text-color]="textColor()">
+
+            @for (card of cards(); track card.title; let i = $index) {
+            <div class="scroll-card" [class.expanded]="expandedScrollCard() === i"
+                [class.collapsed]="expandedScrollCard() !== i" [class.no-expanded]="expandedScrollCard() === -1"
+                [style.opacity]="0.6 + (0.4 * expansionProgress())" (click)="toggleScrollCard(i)">
+
+                <!-- Title shown vertically when collapsed -->
+                <div class="vertical-title">{{ card.title }}</div>
+
+                <div class="card-content">
+                    @if (card.icon) {
+                    <div class="scroll-card-icon">{{ card.icon }}</div>
+                    }
+                    <h2>{{ card.title }}</h2>
+                    <p class="scroll-card-description">{{ card.description }}</p>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>
+}

@@ -1,0 +1,62 @@
+<nav class="nav-container" [ngClass]="containerClasses()" [style.--nav-bg]="backgroundColor()"
+    [style.--nav-blur]="blurAmount()" [style.--nav-border-color]="borderColor()" [style.--nav-radius]="borderRadius()"
+    [style.--nav-text-color]="textColor()" [style.--nav-top-offset]="topOffset()" [style.--nav-font]="fontFamily()"
+    [style.--menu-padding]="menuPadding()">
+
+    <!-- Left: Logo Slot or Default -->
+    <div class="nav-left">
+        <ng-content select="[nav-logo]"></ng-content>
+        @if (!hasLogoSlot) {
+        <a [href]="logo().link || '/'" class="logo-link">
+            @if (logo().src) {
+            <img [src]="logo().src" [alt]="logo().alt || 'Logo'" class="logo-img">
+            } @else {
+            <span class="logo-text">{{ logo().text }}</span>
+            }
+        </a>
+        }
+    </div>
+
+    <!-- Center: Menu Slot or Default -->
+    <div class="nav-center">
+        <ng-content select="[nav-menu]"></ng-content>
+        @if (!hasMenuSlot && menuItems().length > 0) {
+        <ul class="menu-list">
+            @for (item of menuItems(); track item.label) {
+            <li class="menu-item">
+                <a [href]="item.link" class="menu-link">
+                    {{ item.label }}
+                </a>
+            </li>
+            }
+        </ul>
+        }
+    </div>
+
+    <!-- Right: Actions Slot or Default -->
+    <div class="nav-right">
+        <ng-content select="[nav-actions]"></ng-content>
+        @if (!hasActionsSlot) {
+        @if (showLangPicker()) {
+        <div class="lang-picker">
+            <span class="lang-label">EN</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+        }
+
+        @if (cta()) {
+        <a [href]="cta()?.link" class="cta-button" [style.--cta-bg]="ctaColor()" [style.--cta-text]="ctaTextColor()">
+            {{ cta()?.label }}
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"
+                class="arrow-icon">
+                <path d="M1 9L9 1M9 1H3M9 1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </a>
+        }
+        }
+    </div>
+</nav>

@@ -1,0 +1,25 @@
+<section class="scroll-accordion-section" [style.height]="sectionHeight()" [style.--sa-font]="fontFamily()">
+
+    <div class="sticky-wrapper">
+        <div class="cards-container" [style.width]="currentWidth" [style.gap]="gap()"
+            [style.--sa-radius]="borderRadius()" [style.--sa-text-color]="textColor()">
+
+            @for (card of cards(); track card.title; let i = $index) {
+            <div class="accordion-card" [style.min-height]="cardHeight()"
+                [style.background-color]="card.backgroundColor || 'rgba(30, 30, 30, 0.85)'"
+                [style.opacity]="0.6 + (0.4 * expansionProgress())">
+
+                @if (card.icon) {
+                <div class="card-icon">{{ card.icon }}</div>
+                }
+
+                <h3 class="card-title">{{ card.title }}</h3>
+                <p class="card-description">{{ card.description }}</p>
+
+                <!-- Slot for extra content per card -->
+                <ng-content></ng-content>
+            </div>
+            }
+        </div>
+    </div>
+</section>

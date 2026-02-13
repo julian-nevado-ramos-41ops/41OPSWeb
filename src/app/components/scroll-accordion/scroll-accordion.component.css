@@ -1,0 +1,90 @@
+:host {
+    display: block;
+    width: 100%;
+    scroll-snap-align: start;
+}
+
+.scroll-accordion-section {
+    position: relative;
+    width: 100%;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    transition: width 0.1s ease-out;
+    font-family: var(--sa-font, 'Helvetica Neue', 'Arial', sans-serif);
+    color: var(--sa-text-color, #ffffff);
+}
+
+.accordion-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem;
+    border-radius: var(--sa-radius, 20px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.accordion-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.03) 0%,
+            rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+}
+
+.accordion-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+}
+
+.card-description {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.7;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        width: 90% !important;
+        /* Override inline on mobile */
+    }
+
+    .accordion-card {
+        min-height: 200px !important;
+    }
+}
