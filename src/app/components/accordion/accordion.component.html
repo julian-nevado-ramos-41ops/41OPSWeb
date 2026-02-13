@@ -22,12 +22,68 @@
                 <!-- Title shown vertically when collapsed -->
                 <div class="vertical-title">{{ card.title }}</div>
 
-                <div class="card-content">
-                    @if (card.icon) {
-                    <div class="scroll-card-icon">{{ card.icon }}</div>
+                <div class="card-content" [class.card-content-with-map]="card.markers?.length">
+                    <!-- Left column: text & actions -->
+                    <div class="card-text-col" (click)="$event.stopPropagation()">
+                        @if (card.icon) {
+                        <div class="scroll-card-icon">{{ card.icon }}</div>
+                        }
+                        <h2>{{ card.title }}</h2>
+                        <p class="scroll-card-description">{{ card.description }}</p>
+
+                        @if (card.prompt || card.llmLinks?.length) {
+                        <div class="actions-wrapper">
+                            <!-- Prompt copy section -->
+                            @if (card.prompt) {
+                            <div class="prompt-section">
+                                <span class="scroll-card-description">First, copy the prompt:</span>
+                                <button class="copy-btn" (click)="copyPrompt(card.prompt!, $event)">
+                                    @if (copied()) {
+                                    <span class="copy-icon">✓</span> Copied!
+                                    } @else {
+                                    <span class="copy-icon">📋</span> Copy prompt
+                                    }
+                                </button>
+                            </div>
+                            }
+
+                            <!-- LLM links section -->
+                            @if (card.llmLinks?.length) {
+                            <div class="llm-section">
+                                <span class="scroll-card-description">Then, check on the different LLMs:</span>
+                                <div class="llm-buttons">
+                                    @for (link of card.llmLinks; track link.label) {
+                                    <button class="llm-btn" (click)="openLlmLink(link.url, $event)">
+                                        {{ link.label }}
+                                    </button>
+                                    }
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        }
+
+                        <!-- Testimonials section -->
+                        @if (card.testimonials?.length) {
+                        <div class="testimonials-section">
+                            <span class="scroll-card-description testimonials-title">Testimonials:</span>
+                            @for (testimonial of card.testimonials; track testimonial.name) {
+                            <div class="testimonial-item">
+                                <div class="testimonial-author">{{ testimonial.name }} <span
+                                        class="testimonial-role">({{ testimonial.role }})</span></div>
+                                <p class="testimonial-quote">{{ testimonial.quote }}</p>
+                            </div>
+                            }
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Right column: interactive map -->
+                    @if (card.markers?.length) {
+                    <div class="card-map-col" (click)="$event.stopPropagation()">
+                        <app-interactive-map [markers]="card.markers!" />
+                    </div>
                     }
-                    <h2>{{ card.title }}</h2>
-                    <p class="scroll-card-description">{{ card.description }}</p>
                 </div>
             </div>
             }

@@ -41,7 +41,7 @@
 .scroll-cards-container {
     display: flex;
     justify-content: center;
-    transition: width 0.1s ease-out;
+    transition: width 0.3s ease-out;
     font-family: var(--sa-font, 'Helvetica Neue', 'Arial', sans-serif);
     color: var(--sa-text-color, #ffffff);
     height: 70vh;
@@ -125,6 +125,186 @@
 }
 
 /* ============================================
+   SCROLL MODE — Two-column layout (with map)
+   ============================================ */
+.card-content-with-map {
+    flex-direction: row !important;
+    gap: 24px;
+    max-width: none !important;
+}
+
+.card-text-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
+.card-map-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   SCROLL MODE — Prompt Copy Button
+   ============================================ */
+/* Wrapper for prompt & LLM to be side-by-side */
+.actions-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+    align-items: flex-start;
+}
+
+.prompt-section {
+    margin-top: 0;
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.prompt-label,
+.llm-label {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgb(255 255 255 / 16%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'PP Supply Mono Regular', 'Courier New', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+.copy-icon {
+    font-size: 1rem;
+}
+
+/* ============================================
+   SCROLL MODE — LLM Buttons
+   ============================================ */
+.llm-section {
+    margin-top: 0;
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.llm-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.llm-btn {
+    padding: 10px 20px;
+    background: rgb(255 255 255 / 16%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.llm-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.llm-btn:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   SCROLL MODE — Testimonials
+   ============================================ */
+.testimonials-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.testimonials-title {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.testimonial-item {
+    padding: 8px 0;
+    /* Removed background and border */
+    background: transparent;
+    border: none;
+}
+
+.testimonial-author {
+    font-size: 1.25rem;
+    /* Increased size */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 4px;
+}
+
+.testimonial-role {
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.05rem;
+    /* Increased size */
+}
+
+.testimonial-quote {
+    font-size: 1.2rem;
+    /* Increased size */
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-style: italic;
+    position: relative;
+    padding-left: 8px;
+}
+
+.testimonial-quote::before {
+    content: '"';
+    margin-right: 2px;
+}
+
+.testimonial-quote::after {
+    content: '"';
+    margin-left: 2px;
+}
+
+/* ============================================
    SCROLL MODE — Vertical Title (collapsed)
    ============================================ */
 .vertical-title {
@@ -193,5 +373,17 @@
 
     .card-content {
         padding: 30px;
+    }
+
+    .card-content-with-map {
+        flex-direction: column !important;
+    }
+
+    .card-map-col {
+        min-height: 200px;
+    }
+
+    .llm-buttons {
+        flex-direction: column;
     }
 }

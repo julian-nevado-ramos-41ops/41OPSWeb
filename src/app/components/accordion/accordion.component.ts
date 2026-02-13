@@ -16,15 +16,35 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AccordionCardComponent } from '../accordion-card/accordion-card.component';
+import { InteractiveMapComponent, MapMarker } from '../interactive-map/interactive-map.component';
 
 /**
  * Data interface for scroll-mode cards (data-driven).
  */
+export interface LlmLink {
+    label: string;
+    url: string;
+}
+
+export interface Testimonial {
+    name: string;
+    role: string;
+    quote: string;
+}
+
 export interface AccordionCardData {
     title: string;
     description: string;
     icon?: string;
     backgroundColor?: string;
+    /** Text to be copied to clipboard via copy button */
+    prompt?: string;
+    /** LLM service links to display as buttons */
+    llmLinks?: LlmLink[];
+    /** Map markers to display on the interactive map */
+    markers?: MapMarker[];
+    /** Testimonials shown below the LLM buttons */
+    testimonials?: Testimonial[];
 }
 
 /**
@@ -62,7 +82,7 @@ export interface AccordionCardData {
 @Component({
     selector: 'app-accordion',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, InteractiveMapComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './accordion.component.html',
     styleUrls: ['./accordion.component.css'],
@@ -133,6 +153,9 @@ export class AccordionComponent implements AfterViewInit, OnDestroy {
     /** Index of the currently expanded scroll-mode card (-1 = none) */
     expandedScrollCard = signal(-1);
 
+    /** Whether the prompt was recently copied (for UI feedback) */
+    copied = signal(false);
+
     // ─── Content Children (click mode) ─────────────────────
     projectedCards = contentChildren(AccordionCardComponent);
 
@@ -141,6 +164,21 @@ export class AccordionComponent implements AfterViewInit, OnDestroy {
         this.expandedScrollCard.set(
             this.expandedScrollCard() === index ? -1 : index
         );
+    }
+
+    /** Copy prompt text to clipboard */
+    copyPrompt(text: string, event: Event): void {
+        event.stopPropagation();
+        navigator.clipboard.writeText(text).then(() => {
+            this.copied.set(true);
+            setTimeout(() => this.copied.set(false), 2000);
+        });
+    }
+
+    /** Open LLM link in new tab */
+    openLlmLink(url: string, event: Event): void {
+        event.stopPropagation();
+        window.open(url, '_blank', 'noopener,noreferrer');
     }
 
     // ─── Private ───────────────────────────────────────────

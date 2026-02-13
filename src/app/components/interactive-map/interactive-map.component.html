@@ -1,0 +1,14 @@
+<div class="map-wrapper">
+    <div class="map-container" #mapContainer></div>
+
+    <!-- Info panel (shows when a marker is selected) -->
+    @if (selectedMarker(); as marker) {
+    <div class="info-panel">
+        <div class="info-header">
+            <span class="info-city">{{ marker.city }}, {{ marker.country }}</span>
+            <button class="info-close" (click)="clearSelection($event)">✕</button>
+        </div>
+        <p class="info-description">{{ marker.description }}</p>
+    </div>
+    }
+</div>

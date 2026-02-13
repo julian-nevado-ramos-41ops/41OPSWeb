@@ -52,7 +52,7 @@ import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, si
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-top: 10%;
+      padding-top: 5%;
       opacity: 1;
       transition: opacity 0.3s ease;
       max-width: 600px;
