@@ -15,6 +15,7 @@ import { HudOverlayComponent } from './components/hud-overlay/hud-overlay.compon
 
 import { CollapsibleListComponent, CollapsibleItem } from './components/collapsible-list/collapsible-list.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { InfoToast } from './components/info-toast/info-toast';
 
 interface SectionData {
   id: number;
@@ -51,6 +52,8 @@ interface SectionData {
     KpisComponent,
     ContactUsComponent,
     HudOverlayComponent,
+
+    InfoToast
   ],
   template: `
     <app-preloader />
@@ -65,6 +68,8 @@ interface SectionData {
       borderRadius="10px"
       fontFamily="'PP Supply Mono Regular', 'PP Supply Mono Regular Placeholder', monospace"
     />
+
+    <app-info-toast/>
 
     <app-hero 
       title="Extended Production Architectures (EPAs) to Consume AI Efficiently" 
