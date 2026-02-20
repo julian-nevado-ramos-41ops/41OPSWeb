@@ -6,6 +6,7 @@ import {
   afterNextRender,
   OnDestroy,
   ElementRef,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -25,6 +26,7 @@ import {
 })
 export class SpacebarButtonComponent implements OnDestroy {
   pressed = output<void>();
+  isActive = input<boolean>(false);
 
   isPressed = signal(false);
   private pressTimer: ReturnType<typeof setTimeout> | null = null;

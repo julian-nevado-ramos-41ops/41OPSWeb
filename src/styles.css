@@ -50,7 +50,6 @@
 
 html {
     scroll-behavior: smooth;
-    /* scroll-snap-type: y mandatory; REMOVED to prevent forced scrolling */
 }
 
 body {
@@ -64,6 +63,32 @@ body {
     /* Allow vertical scroll */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Scroll Snapping
+   ============================================ */
+html.snapping-enabled {
+    scroll-snap-type: y mandatory;
+}
+
+/* Global snap points for all major sections */
+app-hero,
+app-part-stw,
+app-accordion,
+.awards-block,
+app-sections-container,
+app-logo-carousel,
+app-contact-us,
+.footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: block;
+    /* Ensure they are block for snapping */
+}
+
+app-logo-carousel {
+    margin-top: 10rem;
 }
 
 /* ============================================

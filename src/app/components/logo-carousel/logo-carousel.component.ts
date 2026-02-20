@@ -29,14 +29,13 @@ interface Logo {
           <!-- Original Set -->
           <div *ngFor="let logo of logos; let i = index" 
                class="logo-item"
-               style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 200px; height: 100px; cursor: pointer;"
                (mousemove)="handleMouseMove($event, i)" 
                (mouseleave)="handleMouseLeave(i)"
                [style.transform]="getTransform(i)">
             <img 
               [src]="logo.src" 
               [alt]="logo.name" 
-              style="height: 50px; width: auto; max-width: 150px; object-fit: contain; transition: all 0.3s ease; display: block;"
+              class="logo-img"
               [style.transform]="'translateY(' + logo.offsetY + 'px)'"
               [style.filter]="hoveredIndex === i ? 'grayscale(0) brightness(1.2)' : 'grayscale(1) brightness(1.1)'"
               [style.opacity]="hoveredIndex === i ? '1' : '0.8'"
@@ -46,14 +45,13 @@ interface Logo {
           <!-- Duplicate Set for Infinite Scroll -->
           <div *ngFor="let logo of logos; let i = index" 
                class="logo-item"
-               style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 200px; height: 100px; cursor: pointer;"
                (mousemove)="handleMouseMove($event, i + logos.length)" 
                (mouseleave)="handleMouseLeave(i + logos.length)"
                [style.transform]="getTransform(i + logos.length)">
             <img 
               [src]="logo.src" 
               [alt]="logo.name" 
-              style="height: 50px; width: auto; max-width: 150px; object-fit: contain; transition: all 0.3s ease; display: block;"
+              class="logo-img"
               [style.transform]="'translateY(' + logo.offsetY + 'px)'"
               [style.filter]="hoveredIndex === (i + logos.length) ? 'grayscale(0) brightness(1.2)' : 'grayscale(1) brightness(1.1)'"
               [style.opacity]="hoveredIndex === (i + logos.length) ? '1' : '0.8'"
@@ -122,7 +120,7 @@ interface Logo {
     .track {
       display: flex;
       flex-direction: row;
-      gap: 4rem;
+      gap: clamp(1rem, 4vw, 4rem); /* Responsive gap */
       flex-shrink: 0;
       align-items: center;
     }
@@ -130,11 +128,32 @@ interface Logo {
     @media (max-width: 768px) {
       .carousel-header {
         flex-wrap: wrap;
+        margin-left: 2rem; /* Reduce margin on mobile */
       }
       
       .carousel-wrapper {
         padding: 1rem 0 !important;
       }
+    }
+
+    .logo-item {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(120px, 15vw, 200px); /* Responsive width */
+      height: 100px;
+      cursor: pointer;
+      transition: transform 0.15s ease-out;
+    }
+
+    .logo-img {
+      height: clamp(30px, 5vw, 50px); /* Responsive height */
+      width: auto;
+      max-width: 80%;
+      object-fit: contain;
+      transition: all 0.3s ease;
+      display: block;
     }
 
     @keyframes scroll {
@@ -144,6 +163,12 @@ interface Logo {
 
     .animate-scroll {
       animation: scroll 180s linear infinite; /* Increased duration for a much slower, more elegant scroll */
+    }
+
+    @media (max-width: 768px) {
+      .animate-scroll {
+        animation-duration: 100s; /* Faster scroll on mobile */
+      }
     }
 
     .animate-scroll:hover {
@@ -251,4 +276,6 @@ export class LogoCarouselComponent {
     const t = this.transforms[index] || { x: 0, y: 0 };
     return `translate(${t.x}px, ${t.y}px)`;
   }
+
 }
+

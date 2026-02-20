@@ -140,7 +140,8 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
-      background-color: var(--nav-bg, rgba(48, 48, 48, 0.95));
+      background-color: rgba(13, 13, 13, 0.96);
+      /* More opaque for better readability */
       backdrop-filter: blur(20px);
       border: 1px solid var(--nav-border-color, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
@@ -170,7 +171,7 @@
     .dropdown-link {
       display: block;
       padding: 0.75rem 1rem;
-      color: var(--nav-text-color, #f4f2ee);
+      color: #ffffff !important;
       text-decoration: none;
       font-size: 1rem;
       border-radius: 8px;

@@ -55,10 +55,23 @@
     font-size: 1.55rem;
     line-height: 1.7;
     font-weight: 100;
-    margin: 0;
+    margin: 0 auto;
     opacity: 0.95;
     letter-spacing: -0.01em;
-    white-space: pre-wrap;
+    max-width: 800px;
+}
+
+::ng-deep .intro {
+    margin-bottom: 1.5rem;
+}
+
+::ng-deep .points-container {
+    text-align: left;
+    display: inline-block;
+}
+
+::ng-deep .point-item {
+    margin-bottom: 0.5rem;
 }
 
 @media (max-width: 900px) {

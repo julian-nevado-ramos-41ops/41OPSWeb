@@ -41,7 +41,7 @@ export class NavBarComponent {
     blurAmount = input<string>('15px');
     borderColor = input<string>('rgba(245, 243, 237, 0.13)');
     borderRadius = input<string>('10px');
-    textColor = input<string>('#000000ff');
+    textColor = input<string>('#000000');
     menuPadding = input<string>('0 8rem');
 
     ctaColor = input<string>('#ede7df');

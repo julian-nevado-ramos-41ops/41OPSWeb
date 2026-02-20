@@ -1,65 +1,125 @@
-import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, booleanAttribute } from '@angular/core';
+import { SectionIndicatorComponent } from '../section-indicator/section-indicator.component';
+import { SideNavComponent } from '../side-nav/side-nav.component';
+import { SpacebarButtonComponent } from '../spacebar-button/spacebar-button.component';
 
 @Component({
   selector: 'app-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [SectionIndicatorComponent, SideNavComponent, SpacebarButtonComponent],
   host: {
     'class': 'section',
     '[class.visible]': 'isVisible()',
     '[class.folded]': 'isFolded()',
-    '[class.full-width-section]': 'fullWidth()',
+    '[class.full-width-section]': 'isAccordionSection() || fullWidth()',
     '[style.background-color]': 'backgroundColor()',
     '[style.color]': 'textColor()',
     '[id]': '"section-" + id()',
   },
   template: `
-    <div class="section-content" [class.full-width]="fullWidth()" [class.has-image]="image()" [class.align-start]="!image()">
-      <div class="text-container">
-        <h1 class="section-title">{{ title() }}</h1>
-        @if (subtitle()) {
-          <p class="section-subtitle">{{ subtitle() }}</p>
-        }
-        @if (modalContent()) {
-          <button class="see-more-btn" (click)="openModal($event)">
-            See More <span class="see-more-arrow">→</span>
-          </button>
-        }
-      </div>
-      @if (image()) {
-        <div class="section-image-container">
-          <div class="images-wrapper">
-            <img [src]="image()" [alt]="title()" class="section-image">
-            @if (secondaryImage()) {
-              <img [src]="secondaryImage()" alt="Overlay" class="section-image-secondary">
-            }
-          </div>
+    <div class="left-indicator">
+      @if (totalSections() > 0 && !isAccordionSection() && !fullWidth()) {
+        <app-section-indicator [current]="globalCurrentSection()" [total]="totalSections()" />
+      }
+    </div>
+
+    <div class="section-content" [class.full-width]="isAccordionSection() || fullWidth()" [class.has-image]="image()" [class.align-start]="!image()">
+      @if (!isAccordionSection()) {
+        <div class="text-container">
+          <h1 class="section-title">{{ title() }}</h1>
+          @if (subtitle()) {
+            <p class="section-subtitle">{{ subtitle() }}</p>
+          }
+          @if (modalContent()) {
+            <button class="see-more-btn" (click)="openModal($event)">
+              <span class="see-more-text">See more</span>
+              <span class="see-more-arrow">→</span>
+            </button>
+          }
         </div>
+        @if (image()) {
+          <div class="section-image-container">
+            <img [src]="image()" [alt]="title()" class="section-image">
+          </div>
+        }
+      } @else {
+        <h3 class="section-mini-title">{{ title() }}</h3>
       }
       <div class="content-slot">
         <ng-content />
       </div>
     </div>
+
+    <div class="right-nav">
+      @if (totalSections() > 0 && !isAccordionSection() && !fullWidth()) {
+        <app-side-nav [totalSections]="totalSections()" [currentSection]="globalCurrentSection()" [style.--nav-color]="navColor()" (sectionClicked)="navigate.emit($event)" />
+        @if (sectionIndex() < totalSections() - 1) {
+          <app-spacebar-button [isActive]="globalCurrentSection() === sectionIndex()" (pressed)="nextSection.emit()" />
+        }
+      }
+    </div>
   `,
   styles: [`
     :host {
-      height: 100vh;
+      height: 100vh; /* Fallback for older browsers */
+      height: 100dvh; /* Dynamic viewport height safely avoids mobile browser toolbars */
       width: 100%;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
-      padding-left: 10%;
-      padding-right: 0;
+      padding-left: 2rem;
+      padding-right: 2rem;
       position: relative;
       overflow: hidden;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       box-sizing: border-box;
+      gap: 2rem;
+    }
+
+    .left-indicator {
+      position: relative;
+      height: 100%;
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .left-indicator app-section-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+    }
+
+    .right-nav {
+      position: relative;
+      height: 100%;
+      width: 140px; /* Matched spacebar button width */
+      flex-shrink: 0;
+    }
+
+    .right-nav app-side-nav {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+    }
+
+    .right-nav app-spacebar-button {
+       position: absolute;
+       bottom: 2rem;
+       left: 50%;
+       transform: translateX(-50%);
     }
 
     :host.full-width-section {
       padding-left: 0;
       padding-right: 0;
       justify-content: center;
+    }
+
+    :host.full-width-section .left-indicator,
+    :host.full-width-section .right-nav {
+      display: none;
     }
 
     :host.folded {
@@ -86,25 +146,22 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
     .section-content {
       text-align: left;
       padding: 2rem 0;
-      width: 100%;
+      flex: 1; /* Takes available space */
       max-width: 1400px; 
-      margin-right: auto;
-      margin-left: 0;
       opacity: 1;
       transform: translateY(0);
       display: flex;
-      flex-direction: row; /* Always row on desktop */
-      align-items: center; /* Default center for image sections */
+      flex-direction: row;
+      align-items: center;
       justify-content: space-between;
       gap: 4rem;
     }
 
     .section-content.align-start {
-      flex-direction: column; /* Stack title and content vertically */
+      flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-      justify-content: flex-start;
-      gap: 2rem; /* Reduced margin back to avoid pushing content too far */
+      gap: 2rem;
     }
 
     .section-content.align-start .text-container {
@@ -124,11 +181,6 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
       max-width: none; /* Let image sections span full width to reach right edge */
       margin-right: 0;
       padding-right: 0;
-      /* Flex properties for image layout */
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
     }
     
     /* Removed .has-image specific rule as we want it consistent */
@@ -170,7 +222,7 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
       letter-spacing: 0.05em;
       line-height: 0.9;
       text-transform: uppercase;
-      color: inherit;
+      color: #ffffff;
       margin: 0;
     }
 
@@ -180,117 +232,9 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
       font-weight: 300;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: inherit;
+      color: #ffffff;
       margin-top: 1.5rem;
       opacity: 0.9;
-    }
-
-    .section-image-container {
-      flex: 1.5;
-      display: flex;
-      justify-content: flex-end; 
-      min-width: 50%;
-      margin-right: -20%;
-      position: relative;
-    }
-
-    .images-wrapper {
-      position: relative; /* Context for absolute positioning */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: fit-content;
-    }
-
-    .section-image {
-      max-width: 100%;
-      max-height: 60vh;
-      height: auto;
-      object-fit: contain;
-      display: block; /* Remove inline-block spacing */
-    }
-
-    .section-image-secondary {
-      position: absolute;
-      bottom: -4%; /* Lower slightly as requested */
-      left: 50%; 
-      transform: translateX(-50%) scale(0.85); /* Center and scale down slightly */
-      max-height: 50vh; 
-      width: auto;
-      z-index: 2;
-      pointer-events: none;
-      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-    }
-
-    /* Specific for Section 2 (Bubbles) */
-    :host(#section-2) .section-image {
-      max-height: 50vh;
-    }
-
-    :host(#section-2) .section-image-secondary {
-      bottom: -35%;
-      transform: translateX(-50%) scale(0.65);
-    }
-
-    /* Specific for Section 3 (Scaffold Tree) */
-    :host(#section-3) .section-image-secondary {
-      bottom: -15%;
-      transform: translateX(-50%) scale(0.85);
-    }
-
-    .section-mini-title {
-      font-size: 1rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 1.5rem;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    @media (max-width: 900px) {
-      .section-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-      }
-      
-      .text-container {
-        max-width: 100%;
-        position: static; /* Reset sticky on mobile */
-      }
-      
-      .section-image-container {
-        max-width: 100%;
-        justify-content: center;
-        width: 100%;
-        margin-right: 0; /* Reset margin on mobile */
-      }
-      
-      .section-image {
-        max-height: 40vh;
-      }
-
-      .section-image-secondary {
-        max-height: 30vh;
-      }
-
-      .content-slot {
-        width: 100%;
-      }
-
-      :host {
-        padding-right: 10%; /* Reset padding on mobile */
-      }
-      
-      .section-content.has-image {
-        margin-right: auto;
-        padding-right: 0;
-      }
-    }
-    
-    .content-slot {
-      flex: 1;
-      min-width: 300px;
     }
 
     /* ─── See More Button ─── */
@@ -303,9 +247,9 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid currentColor;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 100px;
-      color: inherit;
+      color: #ffffff;
       font-family: 'PP Supply Mono Regular', 'Courier New', monospace;
       font-size: 0.85rem;
       letter-spacing: 1.5px;
@@ -333,6 +277,104 @@ import { Component, ChangeDetectionStrategy, input, computed, booleanAttribute, 
     .see-more-btn:hover .see-more-arrow {
       transform: translateX(4px);
     }
+
+
+
+    .section-image-container {
+      flex: 1.5; /* Give more space to image relative to text */
+      display: flex;
+      justify-content: flex-end; 
+      min-width: 50%; /* Ensure it takes space */
+      margin-right: -20%; /* Pull strongly to the right */
+    }
+
+    .section-image {
+      max-width: 100%;
+      max-height: 60vh; 
+      height: auto;
+      object-fit: contain;
+    }
+
+    .section-mini-title {
+      font-size: 1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    @media (max-width: 900px) {
+      :host {
+        padding: 0 5%;
+        justify-content: center;
+        gap: 0;
+      }
+
+      .left-indicator {
+        display: block;
+        position: absolute;
+        bottom: 3rem; 
+        left: 1.5rem;
+        width: auto;
+        height: auto; /* Fix: Override the base height: 100% so it doesn't push content off the top */
+        z-index: 100;
+        pointer-events: auto;
+      }
+
+      .left-indicator app-section-indicator {
+        position: static;
+        display: block;
+      }
+
+      .right-nav {
+        display: none;
+      }
+      
+      .section-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .text-container {
+        align-items: center;
+        text-align: center;
+        max-width: 100%;
+        min-width: 0;
+        position: static;
+      }
+
+      .section-image-container {
+        width: 100%;
+        max-width: 100%;
+        margin-right: 0;
+        display: flex;
+        justify-content: center;
+        flex: none;
+      }
+      
+      .section-image {
+        max-height: 40vh;
+      }
+
+      .content-slot {
+        width: 100%;
+      }
+
+      .modal-container {
+        padding: 2rem 1.5rem;
+        width: 95%;
+      }
+    }
+    
+    .content-slot {
+      flex: 1;
+      min-width: 300px;
+    }
   `],
 })
 export class SectionComponent {
@@ -341,20 +383,25 @@ export class SectionComponent {
   subtitle = input('');
   image = input<string | undefined>();
   backgroundColor = input('var(--color-1)');
-  textColor = input('#ffffff');
+  textColor = input<string>('#ffffff');
+  navColor = input('#000000');
+  modalContent = input<string | undefined>();
+  secondaryImage = input<string | undefined>();
+  prompt = input<string | undefined>();
+  llmLinks = input<{ label: string, url: string }[] | undefined>();
   isAccordionSection = input(false, { transform: booleanAttribute });
   fullWidth = input(false, { transform: booleanAttribute });
   isVisible = input(false);
   isFolded = input(false);
 
-  // Modal logic
-  modalContent = input<string | undefined>();
-  prompt = input<string | undefined>();
-  llmLinks = input<{ label: string, url: string }[] | undefined>();
-  requestModal = output<{ title: string, content: string, color: string, prompt?: string, llmLinks?: { label: string, url: string }[] }>();
+  sectionIndex = input(0);
+  totalSections = input(0);
+  globalCurrentSection = input(0);
 
-  // New Image inputs
-  secondaryImage = input<string | undefined>();
+  navigate = output<number>();
+  nextSection = output<void>();
+
+  requestModal = output<{ title: string, content: string, color: string }>();
 
   openModal(event: Event) {
     event.stopPropagation();
@@ -363,9 +410,7 @@ export class SectionComponent {
       this.requestModal.emit({
         title: this.title(),
         content: content,
-        color: this.backgroundColor(),
-        prompt: this.prompt(),
-        llmLinks: this.llmLinks()
+        color: this.backgroundColor()
       });
     }
   }

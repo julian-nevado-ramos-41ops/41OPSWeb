@@ -49,13 +49,7 @@ import { Component, ChangeDetectionStrategy, input, computed } from '@angular/co
     }
 
     @media (max-width: 768px) {
-      :host {
-        bottom: 1.5rem;
-        left: 1.5rem;
-      }
-      .current { font-size: 2.5rem; }
-      .separator { font-size: 2rem; }
-      .total { font-size: 1.25rem; }
+      /* Keep visible on mobile, positioned by parent */
     }
   `,
 })

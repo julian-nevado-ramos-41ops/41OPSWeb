@@ -40,8 +40,9 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 14px;
       font-weight: 700;
-      color: #000000;
+      color: var(--nav-color, #000000);
       line-height: 1;
+      transition: color 0.3s ease;
     }
 
     .timeline-dots {
@@ -58,7 +59,7 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
       display: block;
       width: 6px;
       height: 6px;
-      background-color: #000000;
+      background-color: var(--nav-color, #000000);
       border-radius: 50%;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -68,7 +69,7 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
 
     .timeline-dot.active {
       background-color: transparent;
-      border: 2px solid #000000;
+      border: 2px solid var(--nav-color, #000000);
       width: 8px;
       height: 8px;
       transform: scale(1.2);
