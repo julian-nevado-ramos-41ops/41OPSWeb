@@ -17,6 +17,10 @@ import { HudOverlayComponent } from './components/hud-overlay/hud-overlay.compon
 import { CollapsibleListComponent, CollapsibleItem } from './components/collapsible-list/collapsible-list.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { AccordionComponent, AccordionCardData } from './components/accordion/accordion.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
+
+
 
 interface SectionData {
   id: number;
@@ -55,8 +59,11 @@ interface SectionData {
     ContactUsComponent,
     HudOverlayComponent,
 
-    AccordionComponent
+    AccordionComponent,
+    FooterComponent,
+    CookieBannerComponent
   ],
+
   template: `
     <app-preloader />
     <app-cursor-follower />
@@ -215,9 +222,7 @@ interface SectionData {
     <!-- NEW: Contact Us Section -->
     <app-contact-us id="contact" />
 
-    <footer class="footer">
-      <p>&copy; 2026 SciTheWorld. All rights reserved.</p>
-    </footer>
+    <app-footer />
 
     @if (modalVisible()) {
       <div class="modal-overlay" (click)="closeModal()">
@@ -254,7 +259,10 @@ interface SectionData {
         </div>
       </div>
     }
+
+    <app-cookie-banner />
   `,
+
   styles: [`
     :host {
       display: block;
@@ -281,17 +289,10 @@ interface SectionData {
       scroll-snap-align: start;
     }
 
-    .footer {
-      width: 100%;
-      padding: 4rem 5%;
-      text-align: left;
-      color: rgba(255, 255, 255, 0.6);
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+    app-footer {
       scroll-snap-align: start;
-      box-sizing: border-box;
-      background-color: #0d0d0d;
     }
+
 
     /* ─── Modal ─── */
     .modal-overlay {
@@ -685,7 +686,7 @@ export class AppComponent {
       textColor: '#ffffff',
       customContent: `
                       <p>
-          EPAs are custom deeptech that seats on top of our clients’ departamental PAs(legacies) so that they can unlock their algorithmic nature.They gradually build up the clients operating systems upon which any use case is built and, more interestingly, controlled at ease.
+          <i>[EPAs are custom deeptech that seats on top of our clients’ departamental PAs(legacies) so that they can unlock their algorithmic nature.They gradually build up the clients operating systems upon which any use case is built and, more interestingly, controlled at ease.]</i>
         </p>
     `
     }

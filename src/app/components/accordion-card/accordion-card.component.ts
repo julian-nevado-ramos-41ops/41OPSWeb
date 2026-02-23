@@ -77,6 +77,11 @@ import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, si
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
+      text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      text-overflow: ellipsis;
+      max-width: 80dvh;
+      overflow: hidden;
     }
 
     :host.collapsed.no-expanded .vertical-title {
@@ -84,6 +89,8 @@ import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, si
       transform: none;
       left: 40px;
       bottom: 40px;
+      max-width: calc(100% - 80px);
+      white-space: normal;
     }
 
     /* When expanded, collapsed cards should just show vertical title (default opacity 0 in base style, need to override here) */
@@ -92,11 +99,16 @@ import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, si
     }
 
     h2 {
-      font-size: 2.5rem;
+      font-size: clamp(1.2rem, 8.5cqi, 2.5rem);
       font-weight: 400;
       margin: 0 0 1.5rem 0;
       font-family: 'Bebas Neue', 'Impact', sans-serif;
       color: #ffffff;
+      text-transform: uppercase;
+      line-height: 1.1;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
     @media (max-width: 768px) {
@@ -113,15 +125,41 @@ import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, si
       }
 
       .vertical-title {
-        display: none;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        transform: none !important;
+        position: absolute !important;
+        inset: 0 !important;
+        padding: 1.5rem;
+        font-size: clamp(1.5rem, 2vw, 2.5rem);
+        font-family: 'Bebas Neue', 'Impact', sans-serif;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        color: #ffffff !important;
+        white-space: normal;
+        word-wrap: break-word;
+        line-height: 1.1;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      :host.expanded .vertical-title {
+        display: none !important;
       }
 
       :host.collapsed .card-content {
-        display: flex;
+        display: none;
       }
 
       .card-content {
         padding: 30px;
+      }
+
+      h2 {
+        text-align: center;
       }
     }
   `,

@@ -72,6 +72,14 @@ html.snapping-enabled {
     scroll-snap-type: y mandatory;
 }
 
+@media (max-width: 900px) {
+
+    html.snap-active,
+    html.snapping-enabled {
+        scroll-snap-type: none;
+    }
+}
+
 /* Global snap points for all major sections */
 app-hero,
 app-part-stw,

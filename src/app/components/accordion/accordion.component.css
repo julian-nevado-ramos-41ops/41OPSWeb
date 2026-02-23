@@ -155,6 +155,7 @@
     max-width: 800px;
     box-sizing: border-box;
     overflow-y: auto;
+    container-type: inline-size;
 }
 
 .scroll-card.collapsed .card-content {
@@ -184,20 +185,17 @@
 }
 
 .card-content h2 {
-    font-size: 2.2rem;
+    font-size: clamp(1.2rem, 8.5cqi, 2.5rem);
     font-weight: 400;
     margin: 0 0 1.5rem 0;
     font-family: 'Bebas Neue', 'Impact', sans-serif;
     color: #ffffff;
-}
-
-@media (max-width: 900px) {
-    .card-content h2 {
-        font-size: 1.6rem;
-        word-wrap: break-word;
-        /* Ensure distinct words break if needed */
-        overflow-wrap: break-word;
-    }
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .scroll-card-icon {
@@ -479,8 +477,9 @@
     transform-origin: 0 50%;
     transform: rotate(-90deg);
     white-space: nowrap;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 500;
+    font-family: 'Bebas Neue', 'Impact', sans-serif;
     color: #ffffff;
     opacity: 0;
     pointer-events: none;
@@ -532,6 +531,11 @@
 
     .vertical-title {
         display: none;
+    }
+
+    .card-content h2 {
+        text-align: center;
+        margin: 0;
     }
 
     .scroll-card.collapsed .card-content {
@@ -604,21 +608,22 @@
     .vertical-title {
         display: block !important;
         transform: none !important;
-        /* Reset rotation */
         position: relative !important;
         inset: auto !important;
         padding: 1.5rem;
-        /* Reduced padding slightly */
-        font-size: 1.3rem;
-        /* Reduced font size slightly to fit better */
+        font-family: 'Bebas Neue', 'Impact', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 400;
         text-align: center;
+        text-transform: uppercase;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         width: 100%;
         box-sizing: border-box;
-        color: rgba(255, 255, 255, 0.7);
+        color: #ffffff;
         white-space: normal;
-        /* Allow wrapping */
         word-wrap: break-word;
-        line-height: 1.3;
+        overflow-wrap: break-word;
+        line-height: 1.1;
     }
 
     .scroll-card.expanded .vertical-title {

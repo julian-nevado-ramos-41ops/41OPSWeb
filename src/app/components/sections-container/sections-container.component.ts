@@ -65,6 +65,12 @@ import { DOCUMENT } from '@angular/common';
         margin: 0 1rem;
         border-radius: 16px;
       }
+      :host(:not(.horizontal)) {
+        height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: y mandatory;
+      }
     }
 
     /* ─── Mobile Scroll Indicator ─── */
@@ -411,7 +417,7 @@ export class SectionsContainerComponent implements OnDestroy {
                             SectionsContainerComponent.activeSnapContainers--;
                         }
 
-                        if (SectionsContainerComponent.activeSnapContainers > 0) {
+                        if (SectionsContainerComponent.activeSnapContainers > 0 && this.shouldEnableGlobalSnap()) {
                             this.renderer.addClass(this.document.documentElement, 'snapping-enabled');
                         } else {
                             this.renderer.removeClass(this.document.documentElement, 'snapping-enabled');
@@ -427,6 +433,10 @@ export class SectionsContainerComponent implements OnDestroy {
             { root: null, threshold: 0.2 }
         );
         visibilityObserver.observe(container);
+    }
+
+    private shouldEnableGlobalSnap(): boolean {
+        return window.matchMedia('(min-width: 901px) and (pointer: fine)').matches;
     }
 
     private triggerMobileIndicator() {
