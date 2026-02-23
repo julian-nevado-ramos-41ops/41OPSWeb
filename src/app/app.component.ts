@@ -511,7 +511,7 @@ export class AppComponent {
       testimonials: [
         {
           name: 'EU Country',
-          role: "Sr Civil Servant' 25",
+          role: "Referral upon request",
           quote: "The paper was a discovery - there was already so much sound literature and technology anticipated by SciTheWorld that following their lead was a mere risk-reward optimization. More than 3k companies in the scope.",
         },
       ],
@@ -536,12 +536,12 @@ export class AppComponent {
       testimonials: [
         {
           name: 'IBEX Bank',
-          role: "SVP'24",
+          role: "Referral upon request",
           quote: 'We saw the potential early and started together the transformation of our Asset Manager - 50% personnel reduction followed',
         },
         {
           name: 'Global Energy Company',
-          role: "Regional head of trading'25",
+          role: "Referral upon request",
           quote: "It took us time to understand SciTheWorld's proposition but their track record was pristine and their approach gradual and realistic. We are ready to push for the whole lot - up to speedboats.",
         },
       ],
@@ -555,7 +555,7 @@ export class AppComponent {
       testimonials: [
         {
           name: 'Tier one university',
-          role: "Professor'26",
+          role: "Referral upon request",
           quote: 'We were utterly surprised by the capacity they had to see crystal clear the roadmap in innovation. Thus, we had no other choice but to create a partnership to better understand and value companies in a world where intangibles (e.g. innovation) is the engine.',
         },
       ],
