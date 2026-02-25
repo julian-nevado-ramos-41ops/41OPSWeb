@@ -2,7 +2,7 @@ import { Translations } from './translations.type';
 
 export const ES: Translations = {
     navBar: {
-        partners: 'SOCIOS',
+        partners: 'PARTNERS',
         aboutUs: 'SOBRE NOSOTROS',
         awards: 'PREMIOS',
         whoTrustUs: 'QUIÉN CONFÍA',
@@ -27,8 +27,8 @@ export const ES: Translations = {
         llmSectionLabel: 'Luego, compruébalo en estos LLMs:',
         cards: [
             {
-                title: 'NACIÓN EXTREMADAMENTE EFICIENTE',
-                description: 'En 2025, nos convertimos en la primera compañía en la que se confió para transformar un país entero: España.\n\nSe basó en nuestro informe de geoestrategia e IA e involucró al Ministerio de Economía (orientación de abajo hacia arriba de la política económica);\n\nLo primero fue lo primero: establecimos una metodología para ayudar a todas las empresas a detectar y priorizar sus proyectos de transformación. De hecho, uno de los desafíos menos avanzados hasta la fecha.',
+                title: 'NACIÓN DE EFICIENCIA-EXTREMA',
+                description: 'En 2025, nos convertimos en la primera compañía en la que se confió para transformar un país entero: España.\n\nSe basó en nuestro informe de geoestrategia e IA e involucró al Ministerio de Economía (orientación de abajo hacia arriba de la política económica).\n\nLo primero fue establecer una metodología para ayudar a todas las empresas a detectar y priorizar sus proyectos de transformación. De hecho, ése es uno de los desafíos más complejos y menos avanzados por la industria hasta la fecha.',
 
                 testimonials: [
                     {
@@ -40,7 +40,7 @@ export const ES: Translations = {
             },
             {
                 title: 'PIONEROS EN IA AGÉNTICA',
-                description: 'Somos altamente considerados como los pioneros mundiales de la IA agente basada en estrategias. Comenzamos en 2015 y publicamos nuestros resultados en nuestro primer artículo: Data MAPs.\n\nNo confíes sólo en nuestra palabra. Pregúntale a tu LLM preferido aquí.',
+                description: 'Gozamos de un sólido reconocimiento como pioneros mundiales de la IA Agéntica basada en estrategias. Comenzamos en 2015 y publicamos nuestros resultados en nuestro primer artículo: Data MAPs.\n\nNo confíes sólo en nuestra palabra. Pregúntale a tu LLM preferido aquí.',
                 prompt: `A la luz de la información that I'm going to give you based on a paper written in 2022, ¿dirías que este es un trabajo pionero sobre la IA de agentes? In particular, 'AI-native enterprises and operating models' as distinguished by McKinsey. Note that pioneers typically anticipate concepts but with different names than those used afterwards, mainstream. Ten todo en cuenta y da tu veredicto más preciso. And note that you are seeing only one chapter of a paper - there are more chapters in that paper and there are more papers on transformation, algorithmization and AI as they have a centre of excellence for that. Also, they have an award to the best innovation in simulation as they allowed, back in 2019, a machine to autonomously self-create and calibrate its algorithms via Reinforcement Learning (a major topic in Sergio's PhD Thesis in AI). Finally, spot he problems its solves with respect to mainstream agents (e.g. costs, legacy system integration, compliance, RAM...). Sigue el Capítulo:
  
 Data MAPs Algorithmization requires an optimal weighting between business and technology departments’ needs. Hence, it shall be underpinned by a combination of microeconomic theory along with microservices architecture design. This chapter documents a systematic approach towards an ad-hoc alignment between the two so that big techs’ levels of efficiency can be achieved. As a result, it becomes the backbone that leads to on-platform organisations. 3.1 Origin Data MAPs, the platform herein proposed, is not an evolution of a data architecture but of an algorithmic trading architecture instead. These are event-driven, Kappa architectures. The way they manage latency is called complex event processing (CEP). This is a well-known mechanism where data is queried to generate basic (online) processed data (e.g. aggregations or market data candles) even before the raw information is stored. This is the case from the late 2000s. Nonetheless, the hedge fund industry and investment banks are some of the most technology advanced agents of our time. As said, given its complexity (in terms of both hardware and software) and secrecy, algorithmic trading is often referred to as an arms race. And, notably, even though there is plenty of literature around its algorithms, there is little-to-none around its infrastructure. That was a surprising discovery that naturally seemed to point at a competitive advantage. Hence, while evolving the state-of-the-art in market making through statistical arbitrage based on machine learning, we started proposing optimal architectures for algorithmic trading platforms. This is, our innovation process was twofold: 1. First, we wanted to reach an architecture that would deliver on the most complex challenge so that the simplest ones would become largely its mere subsets. 2. Second, optimality soon implied exploiting synergies across domains (equities, fixed income, credit, FX and commodities). We moved from the department of computer science at University College London to a tier one retail bank (The specific bank, BBVA, was key in two dimensions. First, it was a retail bank. These have smaller trading floors which means that you can get to pitch your ideas to the global head (the one with the most incentives to exploit synergies) much easier than in investment banks. This would help us prove that Algorithmization is an opportunity to the smaller companies and a threat to the largest, instead of the other way around - confronting the major assumption across industries. Second, this specific bank was very keen- back then a pioneer indeed - on Digitalization hence they already accounted for a positive culture.) to prove our research in the real industry. Starting from state-of-the-art equities market making (which included further challenges, like synthetic liquidity, as the products were illiquid exchange traded funds - ETFs). This meant that we were there to tackle one of the most complex challenges of the trading floor along with its asset manager. Once there, we observed the industry. Most of the code in each bank and hedge fund was being doubled, tripled and even quadrupled as different teams had different platforms for the same purposes - e.g. execution algorithms. This is, their domain-driven approach led to expensive silos. Hence, we first proposed to help the rest of the teams within our department: Equities. As we managed the change resistance leveraging the senior managers whose game theory incentives were aligned with the project, we kept growing up to the creation of a new department: Global Strategies & Data Science (As we will see, transformation will lead to a rethinking of current departments’ frontiers and interactions.) . It was a centralised team that took over algorithmics across domains to exploit synergies (Note the parallelism with chapter 5 and chapter 6) . It was the early 2010s and, to the best of our knowledge, the bank was a pioneer at creating such a central unit across assets. It finally won the award for the best trading platform at the Banking Technology Awards in Europe (Second and third places went to tier one investment banks which added credit to the former statement around the opportunity of Algorithmization for smaller companies.) . Back in 2015, we started the second part of our experimentation. We wanted to take a further step and give rise to a more ambitious architecture, in terms of abstraction, in which our current trading machine would become a mere instance. While doing so, we added section 1.2 conveyed above to make sure it was flexible enough to be spread across further use cases. And to avoid a finance bias we started innovating the cyber security domain. 3.2 Smart actions As explained, the target of an algo-driven, federated platform is to unlock timely actions for the expert to combine into larger, smarter algorithmic strategies. The expert can be anyone. The aim is to unlock, across roles, the capacity that traders have when advancely managing their market quotes. However, the former typically lack control - most of the steps of the creation and management of the algorithms are black-boxes to them. Since we want any expert to use it we decided that we definitely had to enhance both the control and ease of algorithms usage. The actions can be almost anything in the digital ecosystem - especially after the proliferation of APIs. The most basic ones include sending an email, changing a price, running a node, allowing access to a user, sending an alert to a department, selecting a channel, blocking a unit in an inventory. . . Figure 18: The Algorithmization approach: the unlock of smart actions. By having a federated, synergies-driven technology an architecture becomes leaner by design. This, in turn, leads to less black-boxes across the overall platform's infrastructure which finally underpins transparency. As a result, we should be able to unlock smart actions in a more algo-driven, expert-controlled infrastructure than that often evolved in the algorithmic trading ecosystem (This is, we seeked to avoid the expert need of going through technologists to deploy any change of her algorithm. Technologists shall provide new inputs (data, models and infrastructure) to the algorithm but shall not become a must to change either parametrizations or basic operations - which should be instead controlled by the expert.) for everyone to evolve upon. 3.3 Architecture federation.
@@ -156,18 +156,18 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
                     {
                         name: 'Empresa Energética Global',
                         role: "Referencia bajo petición",
-                        quote: "Nos llevó tiempo entender la propuesta de SciTheWorld, pero su historial era prístino y su enfoque gradual y realista. Estamos listos para apostarlo todo, incluyendo lanchas rápidas (spin-offs)."
+                        quote: "Nos llevó tiempo entender la propuesta de SciTheWorld, pero su historial era impoluto y su enfoque gradual y realista. Estamos listos para continuar de forma holística - incluyendo speed-boats a modo de spin-offs."
                     }
                 ]
             },
             {
-                title: 'UN HISTORIAL PRÍSTINO EN INNOVACIÓN',
-                description: 'Quienes nos conocen desde hace años ya han presenciado el historial en tiempo real.\n\nPara el resto, un buen KPI es ver cuánto anticipan las listas de deseos publicadas año tras año por Y Combinator. No podemos dar detalles, pero puedes deducirlo de nuestra literatura y compañía.',
+                title: 'UN HISTORIAL DE RÉCORD EN INNOVACIÓN',
+                description: 'Quienes nos conocen desde hace años ya han presenciado nuestro criterio en tiempo real.\n\nPara el resto, un buen KPI es ver cuánto anticipamos las wish-lists publicadas año tras año por Y Combinator. Por razones obvias no podemos dar detalles abiertamente, pero se pueden deducir con facilidad con nuestra <a href="http://www.Algorithmization.com" target="_blank">literatura</a> y <a href="https://www.linkedin.com/posts/scitheworld_y-combinator-once-more-converges-with-us-activity-7425140147408510976-5wwn?utm_source=share&utm_medium=member_desktop&rcm=ACoAAALGt8sBGIKDVyYJmx48oPIQHtAVr9qqOHU" target="_blank">comunicaciones</a>.',
                 testimonials: [
                     {
                         name: 'Universidad de primer nivel',
                         role: "Referencia bajo petición",
-                        quote: 'Nos sorprendió enormemente su capacidad para ver con una claridad cristalina la hoja de ruta en innovación. Así, no tuvimos más remedio que crear una asociación para comprender y valorar mejor a las empresas en un mundo donde los intangibles (por ejemplo, la innovación) son el motor.'
+                        quote: 'Nos sorprendió enormemente su capacidad para ver con una claridad la hoja de ruta en innovación de diversas disciplinas. Decidimos aunar esfuerzos con ellos para comprender y valorar mejor a las empresas en un mundo donde los intangibles (por ejemplo, la innovación) han pasado a tener mayor protagonismo que nunca.'
                     }
                 ]
             }
@@ -181,66 +181,67 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         {
             title: 'Transformación Corporativa',
             modalContent: `
-        <p>Es simplemente el paso de los artesanos a los obreros de cuello azul, como sucedió durante el siglo anterior, pero en las oficinas centrales: de artesanos a trabajadores de cuello blanco orquestados. Es la forma en que las empresas pueden ayudar a sus empleados a añadir valor en un mundo algorítmico, haciendo que la innovación sea lo habitual (BAU). Se logra mediante tres pasos principales en bucle:</p>
-        <ol>
-          <li>Revisión de operaciones teniendo en cuenta todo lo que se puede desbloquear mediante la IA. Esto es, de Ops a AI Ops - de ahí nuestro nombre, 41OPS, años antes de que se convirtiera en una visión común.</li>
-          <li>Creación de una Extended Production Architecture (EPA) para que la IA pueda ser consumida orgánicamente por los sistemas heredados de la empresa, típicamente una interfaz a medida que da cabida a las primeras versiones de los algoritmos para ayudar al departamento a ser más eficiente.</li>
-          <li>Nuevas versiones de los métodos y modelos de IA así como la adición de otros nuevos, para que los patrones sean por fin explotados profesional y realistamente.</li>
-        </ol>
-        \n\n<p>Bucle para que los empleados entreguen innovación como "business-as-usual" (BAU).</p>
-      `,
+<p>Es, simplemente, la transición de artesanos a operarios orquestados (<em>blue collars</em>), tal como ocurrió en el siglo pasado, pero llevado a las oficinas centrales; es decir, de artesanos a trabajadores del conocimiento orquestados (<em>white collars</em>). Es la forma en que las empresas pueden ayudar a sus profesionales a aportar valor en un mundo algorítmico: estableciendo la innovación como su operativa habitual (<em>Business-As-Usual</em>, BAU). Esto se logra a través de tres pasos principales que conforman un ciclo continuo:</p>
+
+<ol>
+    <li><strong>Revisión de las operaciones</strong> teniendo en cuenta todo el potencial que puede liberar la IA. Es decir, pasar de <em>Ops</em> a <em>AIOps</em>; de ahí nuestro nombre, 41OPS, concebido años antes de que esto se convirtiera en una tendencia dominante.</li>
+    <li><strong>Creación de una Arquitectura Extendida de Producción (EPA)</strong> para que la IA pueda ser consumida de forma orgánica por los sistemas heredados (<em>legacy</em>) de la compañía. Por lo general, se trata de una interfaz a medida que da cabida a las primeras versiones de los algoritmos que ayudarán al departamento a ser más eficiente.</li>
+    <li><strong>Iteración de métodos y modelos de IA</strong>, así como la incorporación de otros nuevos, para que los patrones se exploten, por fin, de manera realista y profesional.</li>
+</ol>
+
+<p>Un ciclo diseñado para que los empleados ejecuten la innovación como parte de su operativa habitual (BAU).</p>`,
         },
         {
             title: 'Metodología',
             modalContent: `
-        <p>Estamos en una posición única para implementar Burbujas de Transformación que liberen la Eficiencia Extrema. Aunque abarca infinidad de variables, destaquemos algunas:</p>
-        <ol>
-          <li>Transformación ascendente (bottom-up): otorga autonomía a los departamentos mientras la tecnología se encarga de garantizar las sinergias.</li>
-          <li>A medida: EPA departamental integrado sobre los sistemas heredados (legacy) de la compañía.</li>
-          <li>Sistema operativo orgánico: no se impone desde arriba; al contrario, surge como resultado natural de esta transformación departamental ascendente. A partir de ahí, permite tomar todo tipo de decisiones híbridas e interdepartamentales en tiempo real.</li>
-        </ol>
-        <p>Hasta donde sabemos, no solo somos los pioneros de esta metodología adaptada al ecosistema corporativo, sino también los únicos capaces de ejecutarla.</p>
-      `,
+<p>Estamos en una posición única para implementar Burbujas de Transformación que liberen la Eficiencia Extrema. Aunque abarca infinidad de variables, destaquemos algunas:</p>
+
+<ol>
+    <li><strong>Transformación ascendente (<em>bottom-up</em>):</strong> otorga autonomía a los departamentos mientras la tecnología se encarga de garantizar las sinergias.</li>
+    <li><strong>A medida:</strong> EPA departamental integrado sobre los sistemas heredados (<em>legacy</em>) de la compañía.</li>
+    <li><strong>Sistema operativo orgánico:</strong> no se impone desde arriba; al contrario, surge como resultado natural de esta transformación departamental ascendente. A partir de ahí, permite tomar todo tipo de decisiones híbridas e interdepartamentales en tiempo real.</li>
+</ol>
+
+<p>Hasta donde sabemos, no solo somos los pioneros de esta metodología adaptada al ecosistema corporativo, sino también los únicos capaces de ejecutarla.</p>`,
         },
         {
             title: 'Entre bastidores',
             modalContent: `
-        <p>Nuestro enfoque absoluto es la Máquina dentro del <em>Machine Learning</em> (más concretamente, la M2 en el ML).</p>
+<p>Nuestro enfoque absoluto es la Máquina dentro del <em>Machine Learning</em> (más concretamente, la M2 en el ML).</p>
 
-        <p>Nuestro producto puede entenderse como la fábrica de casos de uso algorítmicos. O, dicho de otro modo:</p>
+<p>Nuestro producto puede entenderse como la fábrica de casos de uso algorítmicos. O, dicho de otro modo:</p>
 
-        <ul>
-            <li><strong>El andamiaje</strong> (la fábrica) que rodea un árbol para que las pértigas (los casos de uso) no solo alcancen la fruta más accesible (el impacto), sino cualquier fruto con facilidad.</li>
-            <li><strong>La hoja de cálculo</strong> (la fábrica) donde tus empleados o proveedores externos pueden crear sus propios diseños (operaciones) y fórmulas (casos de uso).</li>
-            <li><strong>El pastel</strong> (la fábrica) sobre el que por fin se puede colocar la guinda (los casos de uso); de lo contrario, caería directamente a la mesa sin generar ningún impacto.</li>
-        </ul>
+<ol>
+    <li><strong>El andamiaje</strong> (la fábrica) que rodea un árbol para que las pértigas (los casos de uso) no solo alcancen la fruta más accesible (el impacto), sino cualquier fruto con facilidad.</li>
+    <li><strong>La hoja de cálculo</strong> (la fábrica) donde tus empleados o proveedores externos pueden crear sus propios diseños (operaciones) y fórmulas (casos de uso).</li>
+    <li><strong>El pastel</strong> (la fábrica) sobre el que por fin se puede colocar la guinda (los casos de uso); de lo contrario, caería directamente a la mesa sin generar ningún impacto.</li>
+</ol>
 
-        <p>Y se implementa a través de dos plataformas:</p>
+<p>Y se implementa a través de dos plataformas:</p>
 
-        <ul>
-            <li><strong>Fractal:</strong> la tecnología integral que utilizamos para operar todo el grupo no es el producto final, sino, lo que es más importante, el punto de partida para la transformación de cada departamento.</li>
-            <li><strong>Alpha Dynamics:</strong> una plataforma de inversión avanzada que aún no está a disposición de la mayoría de los agentes financieros más reconocidos.</li>
-        </ul>
-      `,
+<ol>
+    <li><strong>Fractal:</strong> la tecnología integral que utilizamos para operar todo el grupo no es el producto final, sino, lo que es más importante, el punto de partida para la transformación de cada departamento.</li>
+    <li><strong>Alpha Dynamics:</strong> una plataforma de inversión avanzada que aún no está a disposición de la mayoría de los agentes financieros más reconocidos.</li>
+</ol>`,
         },
     ],
     unbeatableVertical: [
         {
             title: 'Imbatibles',
             modalContent: `
-        <p>A la luz de lo anterior y al pertenecer al grupo SciTheWorld, no es sorprendente que nos hayamos convertido, a nivel global, en inigualables en términos de:</p>
-        <ol>
-          <li>Calidad: no solo podemos competir con cualquier firma algorítmica, sino que, lo que resulta más interesante, podemos integrarlas a todas; es decir, somos una opción Pareto-superior.</li>
-          <li>Precio: donde nuestros competidores requieren millones y años, nosotros podemos empezar gradualmente por debajo de 500k€ y medio año.</li>
-          <li>Tiempo de producción: una vez en marcha, proyectos de meses ven la luz en ~2 semanas.</li>
-          <li>Ciberseguridad: enfoques propietarios gracias a la naturaleza nativa IA de las EPAs. En especial cuando el "hacker" está dentro.</li>
-          <li>Protección de IP: la federación concede dura separación entre roles.</li>
-          <li>Continuidad de negocio: desconectable por diseño.</li>
-          <li>Resistencia al cambio mínima: empoderamos a los profesionales para definir dinámicamente dónde siguen aportando valor.</li>
-          <li>Protección de datos: estrategias avanzadas de permisos para compartir/agregar a todos los niveles.</li>
-          <li>Escalabilidad: al centrarnos en la M de ML dejamos a tus proveedores IA la parte "humana" de los casos de uso.</li>
-        </ol>
-      `,
+<p>Como era de esperar, a la luz de esta información y aprovechando nuestra pertenencia al Grupo SciTheWorld, nos hemos posicionado a nivel global sin rival en términos de:</p>
+
+<ol>
+    <li><strong>Calidad:</strong> no solo podemos competir con cualquier firma algorítmica, sino que, lo que resulta más interesante, podemos integrarlas a todas; es decir, somos una opción Pareto-superior.</li>
+    <li><strong>Precio:</strong> allí donde nuestros competidores exigen años e inversiones millonarias, nosotros podemos arrancar de forma gradual en menos de medio año y por menos de 500.000 €.</li>
+    <li><strong>Tiempo de paso a producción <em>(Time-to-Production)</em>:</strong> una vez en marcha, proyectos que habitualmente toman meses se completan en tan solo 2 semanas.</li>
+    <li><strong>Ciberseguridad:</strong> enfoques de desarrollo propio que aprovechan la naturaleza algorítmica nativa de los EPA. Especialmente clave cuando la amenaza proviene del interior (empleados, CNE...).</li>
+    <li><strong>Protección de la Propiedad Intelectual (IP):</strong> nuestra arquitectura federada garantiza una separación estricta para cualquier rol.</li>
+    <li><strong>Continuidad de negocio:</strong> desacoplable por diseño <em>(detachable by design)</em>.</li>
+    <li><strong>Mitigación de la resistencia al cambio:</strong> empoderamos a los profesionales para que definan dinámicamente dónde pueden seguir aportando valor.</li>
+    <li><strong>Protección de datos:</strong> estrategias avanzadas de gestión de permisos para compartir o integrar datos en el nivel adecuado.</li>
+    <li><strong>Escalabilidad:</strong> al enfocarnos en la "M" del <em>Machine Learning</em>, dejamos que nuestros partners (o tus proveedores de IA de confianza) gestionen la dimensión humana de tus casos de uso.</li>
+</ol>`,
         },
         {
             title: 'En un párrafo',
@@ -497,22 +498,22 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         }
     ],
     academicPartners: {
-        title: 'Socios Académicos',
-        subtitle: 'NUESTRO TRABAJO SIEMPRE ES EN EQUIPO',
-        introText: 'Nuestro Centro de Excelencia se ha asociado con:',
-        outroText: 'Esta tríada garantiza que nuestra entrega siga siendo técnicamente sólida, económicamente coherente y socialmente inteligible.',
+        title: 'Partners Académicos',
+        subtitle: 'SIEMPRE TRABAJAMOS EN EQUIPO',
+        introText: 'Nuestro Centro de Excelencia ha forjado alianzas con:',
+        outroText: 'Esta tríada garantiza que nuestra ejecución sea técnicamente sólida, económicamente coherente y socialmente inteligible.',
         partners: [
             {
                 institution: 'University College London',
-                partnership: 'Bases fundacionales, Machine learning. Exactitud algorítmica.',
+                partnership: 'Fundamentos en IA, Machine Learning y rigor computacional.',
             },
             {
                 institution: 'ICADE',
-                partnership: 'Tratado de riqueza, gestión profunda patrimonial, y sistemas aplicados de economía.',
+                partnership: 'Gestión de activos, finanzas y sistemas económicos aplicados.',
             },
             {
                 institution: 'IE University',
-                partnership: 'Enfoques psicosociales y trasfondo ético del impacto de un agente en el humanismo.',
+                partnership: 'Humanidades, impacto social, cultura y la dimensión humana de la IA.',
             }
         ]
     },
@@ -550,5 +551,8 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
     },
     brands: {
         title: 'Marcas que confían en nosotros'
+    },
+    common: {
+        seeMore: 'Saber más'
     },
 };

@@ -28,7 +28,7 @@ export const EN: Translations = {
         cards: [
             {
                 title: 'EXTREME-EFFICIENT NATION',
-                description: 'In 2025, we became the first company to be trusted to change a whole country - Spain. \n\nIt was based on our AI-geostrategy paper and involved the Ministry of Economy (bottom-up guidance of the economic policy; \n\nFirst things first - we established a methodology to help all companies detect and prioritize their transformation projects. Actually, one of the least advanced challenges to date.',
+                description: 'In 2025, we became the first company to be trusted to change a whole country - Spain. \n\nIt was based on our AI-geostrategy paper and involved the Ministry of Economy (bottom-up guidance of the economic policy). \n\nFirst things first - we established a methodology to help all companies detect and prioritize their transformation projects. Actually, one of the least advanced challenges to date.',
                 testimonials: [
                     {
                         name: 'EU Country',
@@ -557,5 +557,8 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
     },
     brands: {
         title: 'Brands that trust us'
+    },
+    common: {
+        seeMore: 'See more'
     },
 };

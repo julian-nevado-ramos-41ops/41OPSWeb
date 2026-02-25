@@ -119,3 +119,19 @@ app-logo-carousel {
         opacity: 1;
     }
 }
+
+/* ============================================
+   Links inside accordion card descriptions
+   (must be global: [innerHTML] bypasses Angular encapsulation)
+   ============================================ */
+.scroll-card-description a {
+    color: #e0e0e0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.scroll-card-description a:hover {
+    color: #ffffff;
+    opacity: 1;
+}

@@ -120,4 +120,7 @@ export interface Translations {
     brands: {
         title: string;
     };
+    common: {
+        seeMore: string;
+    };
 }

@@ -39,7 +39,7 @@
                         <div class="scroll-card-icon">{{ card.icon }}</div>
                         }
                         <h2>{{ card.title }}</h2>
-                        <p class="scroll-card-description">{{ card.description }}</p>
+                        <p class="scroll-card-description" [innerHTML]="card.description"></p>
 
                         @if (card.prompt || card.llmLinks?.length) {
                         <div class="actions-wrapper">
