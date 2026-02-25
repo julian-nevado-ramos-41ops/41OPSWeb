@@ -28,7 +28,7 @@ export const EN: Translations = {
         cards: [
             {
                 title: 'EXTREME-EFFICIENT NATION',
-                description: 'In 2025, we became the first company to be trusted to change a whole country - Spain. \n\nIt was based on our AI-geostrategy paper and involved the Ministry of Economy (bottom-up guidance of the economic policy). \n\nFirst things first - we established a methodology to help all companies detect and prioritize their transformation projects. Actually, one of the least advanced challenges to date.',
+                description: 'In 2025, we became the first company to be trusted to change a whole country - Spain. \n\nIt was based on our <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5136657" target="_blank">AI-geostrategy paper</a> and involved the Ministry of Economy (bottom-up guidance of the economic policy). \n\nFirst things first - we established a methodology to help all companies detect and prioritize their transformation projects. Actually, one of the least advanced challenges to date.',
                 testimonials: [
                     {
                         name: 'EU Country',
@@ -161,7 +161,7 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
             },
             {
                 title: 'A PRISTINE TRACK RECORD ON INNOVATION',
-                description: 'Those who have known us for years have already witnessed the track record in real time.\n\nFor the rest, a good KPI is to see how much they anticipate the wish lists published year after year by Y Combinator. We can’t give details but you can work it out throughout our literature and co.',
+                description: 'Those who have known us for years have already witnessed the track record in real time.\n\nFor the rest, a good KPI is to see how much they anticipate the wish lists published year after year by Y Combinator. We can’t give details but you can work it out throughout our <a href="http://www.Algorithmization.com" target="_blank">literature</a> and <a href="https://www.linkedin.com/posts/scitheworld_y-combinator-once-more-converges-with-us-activity-7425140147408510976-5wwn?utm_source=share&utm_medium=member_desktop&rcm=ACoAAALGt8sBGIKDVyYJmx48oPIQHtAVr9qqOHU" target="_blank">communication</a>.',
                 testimonials: [
                     {
                         name: 'Tier one university',
