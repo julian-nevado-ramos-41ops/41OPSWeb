@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, input, computed, signal, HostListener, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, signal, HostListener, PLATFORM_ID, Inject, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslationService } from '../../i18n';
 
 export interface NavCommand {
     label: string;
@@ -25,6 +26,7 @@ export interface NavLogo {
     styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent {
+    readonly ts = inject(TranslationService);
     // Content Inputs
     logo = input<NavLogo>({ text: 'Logo' });
     menuItems = input<NavCommand[]>([]);

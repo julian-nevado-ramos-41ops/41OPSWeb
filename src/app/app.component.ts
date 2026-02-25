@@ -1,5 +1,5 @@
 // Trigger re-compilation
-import { Component, ChangeDetectionStrategy, signal, viewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, viewChild } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
 import { SectionsContainerComponent } from './components/sections-container/sections-container.component';
 import { SectionComponent } from './components/section/section.component';
@@ -20,7 +20,7 @@ import { AccordionComponent, AccordionCardData } from './components/accordion/ac
 import { FooterComponent } from './components/footer/footer.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 
-
+import { TranslationService } from './i18n';
 
 interface SectionData {
   id: number;
@@ -79,8 +79,8 @@ interface SectionData {
     />
 
     <app-hero 
-      title="Extended Production Architectures (EPAs) to Consume AI Efficiently" 
-      subtitle="41OPS" 
+      [title]="ts.t().hero.title" 
+      [subtitle]="ts.t().hero.subtitle" 
       [showBrackets]="true"
       bracketsColor="var(--color-1)"
       subtitleColor="gray"
@@ -88,15 +88,15 @@ interface SectionData {
     />
 
     <app-part-stw
-      titleHtml="Part of <u>SciTheWorld</u>"
-      description="We are the transformation execution arm at SciTheWorld:\n1. We translate Algorithmization theory into deep technology infrastructure.\n2. And then we onboard the technology at companies of all kinds so that they can absorb AI at ease."
+      [titleHtml]="ts.t().partStw.titleHtml"
+      [description]="ts.t().partStw.description"
     />
 
     <app-accordion
       id="highlights-accordion"
       mode="scroll"
-      sectionTitle="HIGHLIGHTS"
-      sectionSubtitle="Plenty of achievements"
+      [sectionTitle]="ts.t().highlights.sectionTitle"
+      [sectionSubtitle]="ts.t().highlights.sectionSubtitle"
       [cards]="accordionCards()"
       minWidth="60%"
       maxWidth="90%"
@@ -105,6 +105,11 @@ interface SectionData {
       borderRadius="20px"
       sectionHeight="200vh"
       [scrollSnap]="true"
+      [testimonialsLabel]="ts.t().highlights.testimonialsLabel"
+      [copyPromptLabel]="ts.t().highlights.copyPromptLabel"
+      [copyButtonLabel]="ts.t().highlights.copyButtonLabel"
+      [copiedButtonLabel]="ts.t().highlights.copiedButtonLabel"
+      [llmSectionLabel]="ts.t().highlights.llmSectionLabel"
     />
 
 
@@ -136,10 +141,10 @@ interface SectionData {
     <div class="awards-block" id="partners">
       <app-academic-partners
         [partners]="academicPartners()"
-        title="Academic Partners"
-        subtitle="WE ALWAYS WORK AS A TEAM"
-        introText="Algorithmization is continuously challenged, refined, and expanded through long-term academic collaboration across complementary domains:"
-        outroText="This triad ensures that Algorithmization remains technically sound, economically coherent and socially intelligible."
+        [title]="ts.t().academicPartners.title"
+        [subtitle]="ts.t().academicPartners.subtitle"
+        [introText]="ts.t().academicPartners.introText"
+        [outroText]="ts.t().academicPartners.outroText"
       />
     </div>
 
@@ -234,19 +239,19 @@ interface SectionData {
               <div class="modal-actions">
                 @if (currentModalData()?.prompt) {
                   <div class="prompt-section">
-                    <span class="action-label">First, copy the prompt:</span>
+                    <span class="action-label">{{ ts.t().modals.copyPromptFirst }}</span>
                     <button class="copy-btn" (click)="copyPrompt(currentModalData()!.prompt!)">
                       @if (copied()) {
-                        <span class="copy-icon">✓</span> Copied!
+                        <span class="copy-icon">✓</span> {{ ts.t().modals.copied }}
                       } @else {
-                        <span class="copy-icon">📋</span> Copy prompt
+                        <span class="copy-icon">📋</span> {{ ts.t().modals.copyPrompt }}
                       }
                     </button>
                   </div>
                 }
                 @if (currentModalData()?.llmLinks?.length) {
                   <div class="llm-section">
-                    <span class="action-label">Then, check on the different LLMs:</span>
+                    <span class="action-label">{{ ts.t().modals.checkLlms }}</span>
                     <div class="llm-buttons">
                       @for (link of currentModalData()!.llmLinks!; track link.label) {
                         <button class="llm-btn" (click)="openLlmLink(link.url)">{{ link.label }}</button>
@@ -479,6 +484,7 @@ interface SectionData {
   `],
 })
 export class AppComponent {
+  readonly ts = inject(TranslationService);
   currentSection = signal(0);
 
   modalVisible = signal(false);
@@ -501,65 +507,60 @@ export class AppComponent {
     });
   }
 
-  accordionCards = signal<AccordionCardData[]>([
+  accordionCards = computed<AccordionCardData[]>(() => [
     {
-      title: 'EXTREME-EFFICIENT NATION',
-      description: 'In 2025, we became the first company to be trusted to change a whole country - Spain. \n\nIt was based on our AI-geostrategy paper and involved the Ministry of Economy (bottom-up guidance of the economic policy; \n\nFirst things first - we established a methodology to help all companies detect and prioritize their transformation projects. Actually, one of the least advanced challenges to date.',
+      title: this.ts.t().highlights.cards[0].title,
+      description: this.ts.t().highlights.cards[0].description,
       icon: '',
       images: [{ src: './img/highlights/sergio_ee_nations.png', alt: 'Sergio EE Nations' }],
       imagesStackClass: 'stack-1',
       backgroundColor: 'rgba(232, 93, 4, 0.85)',
-      testimonials: [
-        {
-          name: 'EU Country',
-          role: "Referral upon request",
-          quote: "The paper was a discovery - there was already so much sound literature and technology anticipated by SciTheWorld that following their lead was a mere risk-reward optimization. More than 3k companies in the scope.",
-        },
-      ],
+      testimonials: this.ts.t().highlights.cards[0].testimonials,
     },
     {
-      title: 'PIONEERS OF AGENTIC AI',
-      description: 'We are highly regarded as the global pioneers of strategies-based Agentic AI. We started in 2015 and published our results in our first paper - Data MAPs.\n\nDo not trust our word for that. Ask your preferred LLM, here.',
+      title: this.ts.t().highlights.cards[1].title,
+      description: this.ts.t().highlights.cards[1].description,
       icon: '',
       images: [{ src: './img/highlights/sergio_talk_2.png', alt: 'Sergio Talk 2' }],
       imagesStackClass: 'hide-when-open',
       backgroundColor: 'rgba(0, 119, 182, 0.85)',
-      prompt: `To the light of the info that I'm going to give you based on a paper written in 2022, would you say this is a pioneer work on agentic AI? In particular, 'AI-native enterprises and operating models' as distinguished by McKinsey. Note that pioneers typically anticipate concepts but with different names than those used afterwards, mainstream. Take everything into account and make your most accurate verdict. And note that you are seeing only one chapter of a paper - there are more chapters in that paper and there are more papers on transformation, algorithmization and AI as they have a centre of excellence for that. Also, they have an award to the best innovation in simulation as they allowed, back in 2019, a machine to autonomously self-create and calibrate its algorithms via Reinforcement Learning (a major topic in Sergio's PhD Thesis in AI). Finally, spot he problems its solves with respect to mainstream agents (e.g. costs, legacy system integration, compliance, RAM...). Follows the Chapter:\n\nData MAPs Algorithmization requires an optimal weighting between business and technology departments’ needs...`,
+      prompt: this.ts.t().highlights.cards[1].prompt,
       llmLinks: [
         { label: 'ChatGPT', url: 'https://chat.openai.com' },
         { label: 'Claude.AI', url: 'https://claude.ai' },
         { label: 'Gemini', url: 'https://gemini.google.com' },
       ],
+      testimonials: this.ts.t().highlights.cards[1].testimonials,
       markers: [
-        { id: 'madrid', city: 'MADRID', country: 'SPAIN', x: 49.0, y: 27.55, description: 'European HQ — where the national transformation strategy was born. Home to the core research team driving AI-geostrategy policy.lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua  lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua' },
-        { id: 'barcelona', city: 'BARCELONA', country: 'SPAIN', x: 50.6, y: 27.0, description: 'Innovation Hub — key center for AI research and development, collaborating with top technical universities and startups in the Mediterranean corridor.' },
-      ],
-      testimonials: [
-        {
-          name: 'IBEX Bank',
-          role: "Referral upon request",
-          quote: 'We saw the potential early and started together the transformation of our Asset Manager - 50% personnel reduction followed',
-        },
-        {
-          name: 'Global Energy Company',
-          role: "Referral upon request",
-          quote: "It took us time to understand SciTheWorld's proposition but their track record was pristine and their approach gradual and realistic. We are ready to push for the whole lot - up to speedboats.",
-        },
+        { id: 'san-francisco', city: this.ts.t().highlights.cards[1].markers![0].city, country: this.ts.t().highlights.cards[1].markers![0].country, x: 16.0, y: 29.0, description: this.ts.t().highlights.cards[1].markers![0].description },
+        { id: 'new-york', city: this.ts.t().highlights.cards[1].markers![1].city, country: this.ts.t().highlights.cards[1].markers![1].country, x: 29.4, y: 27.4, description: this.ts.t().highlights.cards[1].markers![1].description },
+        { id: 'los-angeles', city: this.ts.t().highlights.cards[1].markers![2].city, country: this.ts.t().highlights.cards[1].markers![2].country, x: 17.2, y: 31.1, description: this.ts.t().highlights.cards[1].markers![2].description },
+        { id: 'chicago', city: this.ts.t().highlights.cards[1].markers![3].city, country: this.ts.t().highlights.cards[1].markers![3].country, x: 25.7, y: 26.7, description: this.ts.t().highlights.cards[1].markers![3].description },
+        { id: 'houston', city: this.ts.t().highlights.cards[1].markers![4].city, country: this.ts.t().highlights.cards[1].markers![4].country, x: 23.5, y: 33.5, description: this.ts.t().highlights.cards[1].markers![4].description },
+        { id: 'philadelphia', city: this.ts.t().highlights.cards[1].markers![5].city, country: this.ts.t().highlights.cards[1].markers![5].country, x: 29.1, y: 27.8, description: this.ts.t().highlights.cards[1].markers![5].description },
+        { id: 'london', city: this.ts.t().highlights.cards[1].markers![6].city, country: this.ts.t().highlights.cards[1].markers![6].country, x: 49.9, y: 21.4, description: this.ts.t().highlights.cards[1].markers![6].description },
+        { id: 'manchester', city: this.ts.t().highlights.cards[1].markers![7].city, country: this.ts.t().highlights.cards[1].markers![7].country, x: 49.4, y: 20.3, description: this.ts.t().highlights.cards[1].markers![7].description },
+        { id: 'edinburgh', city: this.ts.t().highlights.cards[1].markers![8].city, country: this.ts.t().highlights.cards[1].markers![8].country, x: 49.1, y: 18.9, description: this.ts.t().highlights.cards[1].markers![8].description },
+        { id: 'birmingham', city: this.ts.t().highlights.cards[1].markers![9].city, country: this.ts.t().highlights.cards[1].markers![9].country, x: 49.5, y: 20.8, description: this.ts.t().highlights.cards[1].markers![9].description },
+        { id: 'new-delhi', city: this.ts.t().highlights.cards[1].markers![10].city, country: this.ts.t().highlights.cards[1].markers![10].country, x: 71.4, y: 34.1, description: this.ts.t().highlights.cards[1].markers![10].description },
+        { id: 'mumbai', city: this.ts.t().highlights.cards[1].markers![11].city, country: this.ts.t().highlights.cards[1].markers![11].country, x: 70.2, y: 39.4, description: this.ts.t().highlights.cards[1].markers![11].description },
+        { id: 'madrid', city: this.ts.t().highlights.cards[1].markers![12].city, country: this.ts.t().highlights.cards[1].markers![12].country, x: 49.0, y: 27.5, description: this.ts.t().highlights.cards[1].markers![12].description },
+        { id: 'barcelona', city: this.ts.t().highlights.cards[1].markers![13].city, country: this.ts.t().highlights.cards[1].markers![13].country, x: 50.6, y: 27.0, description: this.ts.t().highlights.cards[1].markers![13].description },
+        { id: 'tehran', city: this.ts.t().highlights.cards[1].markers![14].city, country: this.ts.t().highlights.cards[1].markers![14].country, x: 64.3, y: 30.2, description: this.ts.t().highlights.cards[1].markers![14].description },
+        { id: 'paris', city: this.ts.t().highlights.cards[1].markers![15].city, country: this.ts.t().highlights.cards[1].markers![15].country, x: 50.7, y: 22.9, description: this.ts.t().highlights.cards[1].markers![15].description },
+        { id: 'bucharest', city: this.ts.t().highlights.cards[1].markers![16].city, country: this.ts.t().highlights.cards[1].markers![16].country, x: 57.3, y: 25.3, description: this.ts.t().highlights.cards[1].markers![16].description },
+        { id: 'hong-kong', city: this.ts.t().highlights.cards[1].markers![17].city, country: this.ts.t().highlights.cards[1].markers![17].country, x: 81.7, y: 37.6, description: this.ts.t().highlights.cards[1].markers![17].description },
+        { id: 'seoul', city: this.ts.t().highlights.cards[1].markers![18].city, country: this.ts.t().highlights.cards[1].markers![18].country, x: 85.3, y: 29.1, description: this.ts.t().highlights.cards[1].markers![18].description },
+        { id: 'toronto', city: this.ts.t().highlights.cards[1].markers![19].city, country: this.ts.t().highlights.cards[1].markers![19].country, x: 27.9, y: 25.7, description: this.ts.t().highlights.cards[1].markers![19].description },
       ],
     },
     {
-      title: 'A PRISTINE TRACK RECORD ON INNOVATION',
-      description: 'Those who have known us for years have already witnessed the track record in real time.\n\nFor the rest, a good KPI is to see how much they anticipate the wish lists published year after year by Y Combinator. We can’t give details but you can work it out throughout our literature and co.',
+      title: this.ts.t().highlights.cards[2].title,
+      description: this.ts.t().highlights.cards[2].description,
       icon: '',
       images: [{ src: './img/highlights/sergio_talk1.png', alt: 'Sergio Talk 1' }],
       backgroundColor: 'rgba(59, 25, 180, 0.85)',
-      testimonials: [
-        {
-          name: 'Tier one university',
-          role: "Referral upon request",
-          quote: 'We were utterly surprised by the capacity they had to see crystal clear the roadmap in innovation. Thus, we had no other choice but to create a partnership to better understand and value companies in a world where intangibles (e.g. innovation) is the engine.',
-        },
-      ],
+      testimonials: this.ts.t().highlights.cards[2].testimonials,
     },
   ]);
 
@@ -567,364 +568,191 @@ export class AppComponent {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  navItems = signal<NavCommand[]>([
-    { label: 'PARTNERS', link: '#partners' },
-    { label: 'ABOUT US', link: '#about-us' },
-    { label: 'AWARDS', link: '#awards' },
-    { label: 'WHO TRUST US', link: '#who-trust-us' },
+  navItems = computed<NavCommand[]>(() => [
+    { label: this.ts.t().navBar.partners, link: '#partners' },
+    { label: this.ts.t().navBar.aboutUs, link: '#about-us' },
+    { label: this.ts.t().navBar.awards, link: '#awards' },
+    { label: this.ts.t().navBar.whoTrustUs, link: '#who-trust-us' },
     {
-      label: 'THE GROUP', children: [
+      label: this.ts.t().navBar.theGroup, children: [
         { label: 'SciTheWorld', link: 'https://scitheworld.com' },
         { label: 'Algorithmization', link: 'https://algorithmization.com' },
         { label: 'SystematicMe', link: 'https://systematicme.com' },
         { label: 'Learning~Adaptive', link: 'https://learningadaptive.com' }
       ]
     },
-    { label: 'CONTACT', link: '#contact' }
+    { label: this.ts.t().navBar.contact, link: '#contact' }
   ]);
 
   /* ── 2 horizontal sections (both black) ── */
-  horizontalSections = signal<SectionData[]>([
-    { id: 1, title: 'TOOLKIT', subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit.png' },
-    { id: 2, title: 'HIGHLIGHTS', subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit_messages_41OPS (1).png' },
+  horizontalSections = computed<SectionData[]>(() => [
+    { id: 1, title: this.ts.t().horizontalSections[0].title, subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit.png' },
+    { id: 2, title: this.ts.t().horizontalSections[1].title, subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit_messages_41OPS (1).png' },
   ]);
 
 
 
   /* ── 5 NEW horizontal sections ── */
   /* ── 5 NEW horizontal sections ── */
-  horizontalSectionsNew = signal<SectionData[]>([
+  horizontalSectionsNew = computed<SectionData[]>(() => [
     {
       id: 1,
-      title: 'Corporate Transformation',
+      title: this.ts.t().aboutUsHorizontal[0].title,
       subtitle: '',
       backgroundColor: '#E63946',
       textColor: '#ffffff',
       image: 'img/state_of_the_art_platforms.png',
-      modalContent: `
-        <p>It’s just the move from artisans to orchestrated blue collars, as it happened during the previous century, but in the headquarters - hence, from artisans to orchestrated white collars. It is the way companies can help their employees add value in an algorithmic world - by stating innovation as business-as-usual (BAU). It is accomplished through three main steps that loop:</p>
-        <ol>
-          <li>Revisit of operations taking into account all that can be unlocked through AI. This is, from Ops to AI Ops - hence, our name, 41OPS, years before it became a mainstream vision.</li>
-          <li>Creation of an Extended Production Architecture (EPA) so that AI can be organically consumed by the company’s legacy - typically, a custom interface which gives room to the first versions of the algorithms that will help the department become more efficient.</li>
-          <li>New versions of the methods and AI models as well as addition of new ones so that patterns are at last professionally, realistically exploited.</li>
-        </ol>
-        \n\n<p>Loop so that employees deliver innovation as business-as-usual (BAU).</p>
-      `
+      modalContent: this.ts.t().aboutUsHorizontal[0].modalContent
     },
     {
       id: 2,
-      title: 'Methodology',
+      title: this.ts.t().aboutUsHorizontal[1].title,
       subtitle: '',
       backgroundColor: '#457B9D',
       textColor: '#ffffff',
-      image: 'img/sections/sticker_bot_head_jaime_AGI.png',
+      image: 'img/sections/company_departments_bubbles.png',
       secondaryImage: 'img/sections/company_departments_bubbles.png',
-      modalContent: `
-        <p>We are uniquely positioned to deliver Transformation Bubbles towards the unlocking of Extreme-Efficiency. It ticks 1000 dimensions but let’s highlight a few:</p>
-        <ol>
-          <li>Bottom-up transformation: letting departments account for freedom while synergies are granted via technology.</li>
-          <li>Customized: departamental EPA upon the company’s legacy.</li>
-          <li>Organic operating system: not forced but, on the contrary, as a byproduct from the departamental, bottom-up transformation. Thereon, all sorts of hybrid decisions, across departments, can be taken in real time.</li>
-        </ol>
-        <p>To the best of our knowledge, we are not only the pioneers of this corporate-friendly methodology but also, the only ones who can deliver it.</p>
-      `
+      modalContent: this.ts.t().aboutUsHorizontal[1].modalContent
     },
     {
       id: 3,
-      title: 'Behind-the-scenes',
+      title: this.ts.t().aboutUsHorizontal[2].title,
       subtitle: '',
       backgroundColor: '#2A9D8F',
       textColor: '#ffffff',
       image: 'img/sections/sticker_bot_no_face_jaime (1).png',
       secondaryImage: 'img/sections/scaffold_apple_tree.png',
-      modalContent: `
-        <p>Our laser-focus is the Machine in Machine Learning (more particularly, the M2 in ML).</p>
-        <p>Our product can be understood as the factory of algorithmic use cases. Or, else:</p>
-        <ol>
-          <li>The scaffolding (the factory) surrounding a tree so that the sticks (the use cases) can reach not only low-hanging fruits (the impact) but any fruit at ease.</li>
-          <li>The spreadsheet (the factory) where your employees or external providers can create their own designs (ops) and formulas (use cases).</li>
-          <li>The cake (the factory) upon which the cherries (use cases) can be at last be put on top - else, they fall directly into the table leaving no impact behind.</li>
-        </ol>
-        <p>And it delivered through two platforms:</p>
-        <ol>
-          <li>Fractal: the end-to-end tech that we use to run the whole group becomes not the end-product but, crucially, the beginning-product of each department’s transformation.</li>
-          <li>Alpha Dynamics: an advanced investment platform that is not available yet to most of the best known financial agents.</li>
-        </ol>
-      `
+      modalContent: this.ts.t().aboutUsHorizontal[2].modalContent
     }
   ]);
 
   /* ── 2 NEW sections (extracted from horizontal) ── */
-  verticalSectionsUnbeatable = signal<SectionData[]>([
+  verticalSectionsUnbeatable = computed<SectionData[]>(() => [
     {
       id: 4,
-      title: 'Unbeatable',
+      title: this.ts.t().unbeatableVertical[0].title,
       subtitle: '',
       backgroundColor: '#F4A261',
       textColor: '#ffffff',
       image: '',
-      modalContent: `
-        <p>Not surprisingly, the light of above information and leveraging the belonging to SciTheWorld Group, we have become, globally, we are second-to-none in terms of:</p>
-        <ol>
-          <li>Quality: we can not only compete with any algorithmic house but, more interestingly, aggregate them all - i.e. we are a Pareto Superior.</li>
-          <li>Price: where our competitors require millions and years we can start gradual for less than €500k and less than half a year.</li>
-          <li>Time-to-Production: once up and running, projects that take months are usually done within 2 weeks.</li>
-          <li>Cybersecurity: proprietary approaches that leverage the algorithmic nativity of the EPAs. In particular, when the hacker is inside (employee, CNE…).</li>
-          <li>IP protection: federation grants hard separation across any role.</li>
-          <li>Business continuity: detachable by design.</li>
-          <li>Ease of change resistance: we empower professionals to dynamically define where they can keep adding value.</li>
-          <li>Data protection: advanced permissioning strategies to share or aggregate data at the right level.</li>
-          <li>Scalability: as we focus on the M in ML we can let our partners (or your preferred AI providers) do the human part of your use cases.</li>
-        </ol>
-      `
+      modalContent: this.ts.t().unbeatableVertical[0].modalContent
     },
     {
       id: 5,
-      title: 'In a paragraph',
+      title: this.ts.t().unbeatableVertical[1].title,
       subtitle: '',
       backgroundColor: '#1D3557',
       textColor: '#ffffff',
-      customContent: `
-                      <p>
-          <i>[EPAs are custom deeptech that seats on top of our clients’ departamental PAs(legacies) so that they can unlock their algorithmic nature.They gradually build up the clients operating systems upon which any use case is built and, more interestingly, controlled at ease.]</i>
-        </p>
-    `
+      customContent: this.ts.t().unbeatableVertical[1].customContent
     }
   ]);
 
   /* ── 8 NEW vertical sections ── */
-  verticalSectionsNew = signal<SectionData[]>([
+  verticalSectionsNew = computed<SectionData[]>(() => [
     {
       id: 1,
-      title: 'About us',
-      subtitle: 'THE EXECUTION ARM OF SCITHEWORLD',
+      title: this.ts.t().newVerticalSections[0].title,
+      subtitle: this.ts.t().newVerticalSections[0].subtitle,
       backgroundColor: '#4AB5EA',
-      modalContent: `
-  < p > 41OPS is SciTheWorld’s AI - native transformation company.</p>
-    < p > From its inception, it has also played a structural role within the Group: funding the Centre of Excellence so that Algorithmization could remain free and independent in its intellectual property creation.</p>
-      < p > This independence is not incidental.Long - run, frontier research—ours spans more than a decade—is effectively unfunded by traditional mechanisms: not by universities, not by corporations, and not by investors. 41OPS exists, in part, to close that structural gap between applied science and industrial reality.</p>
-        < p > 41OPS inherits from SciTheWorld’s: </p>
-          < ul >
-          <li>Algorithmization discipline(methodology), </li>
-            < li > Custom SaaS platforms:
-<ol>
-  <li>Fractal platform(AI - native corporate tech), </li>
-    < li > Alpha Dynamics platform(investment and decision systems).</li>
-      </ol>
-      </li>
-      </ul>
-      < p > This guarantees coherence between theory, architecture, and execution.</p>
-        `
+      modalContent: this.ts.t().newVerticalSections[0].modalContent
     },
     {
       id: 2,
-      title: 'What we actually deliver',
-      subtitle: 'THE REAL DEAL',
+      title: this.ts.t().newVerticalSections[1].title,
+      subtitle: this.ts.t().newVerticalSections[1].subtitle,
       backgroundColor: '#FA715E',
-      modalContent: `
-        < p > 41OPS sells Extreme - Efficiency.SciTheWorld is an example itself of an Extreme - Efficient Group: </p>
-          < ol >
-          <li>Algorithmization: 2 people(co - founders).</li>
-            < li > Platforms:
-<ul style="list-style-type: lower-alpha;" >
-  <li>Fractal : 4.5 people(co - founders + 2.5 employees that rotate to ensure scalability and resilience).</li>
-    < li > Alpha Dynamics: 2 people(co - founders).</li>
-      </ul>
-      </li>
-      < li > Learning - adaptive and SystematicMe: 2 people.</li>
-        </ol>
-        < p > The Bank of Spain was so surprised by this capacity that they even sent people to briefly audit our methodology.</p>
-          < p > Typical outputs include “Transformation Bubbles”: </p>
-            < ul >
-            <li>AI - native workflows and protocols.</li>
-              < li > SaaS platforms customized at ease to each department’s needs.</li>
-                </ul>
-                < p > Average time - to - production across projects once transformation becomes business - as - usual(BAU) upon our platforms: ~2 weeks.</p>
-                  `
+      modalContent: this.ts.t().newVerticalSections[1].modalContent
     },
     {
       id: 3,
-      title: 'Brands that trust us',
-      subtitle: 'ALL SORTS OF SIZES, INDUSTRIES AND DIGITAL MATURITY',
+      title: this.ts.t().newVerticalSections[2].title,
+      subtitle: this.ts.t().newVerticalSections[2].subtitle,
       backgroundColor: '#4CD6BC',
-      modalContent: `
-                  < p > As the execution arm of our Centre of Excellence, our trajectory has necessarily differed from that of most technology companies.From the outset, we prioritized getting the technology holistically right over maximizing short - term revenue.</p>
-                    < p > The reason lies in what we refer to as The Cube, introduced in Algorithmization’s first paper, Data MAPs: On - Platform Organizations.The challenge was straightforward but demanding: how do you prove the universality of a technological breakthrough ? </p>
-                      < p > SciTheWorld’s answer was empirical rather than rhetorical.They chose to validate the technology through us by filling the Cube with real use cases spanning: </p>
-                        < ul >
-                        <li>multiple sectors, </li>
-                          < li > a wide range of company sizes(from small organizations to listed corporations), </li>
-                            < li > and very different levels of digital maturity.</li>
-                              </ul>
-                              < p > Crucially, once a use case proved successful, we did not replicate it repeatedly to maximize profits.Instead, we deliberately sought the next most orthogonal case—one that stressed the system in a different dimension.This approach optimized not for revenue, but for flexibility, robustness, and universality of the technology.</p>
-                                < p > As a consequence, our work gained global visibility—through universities, professional networks, and media influence—which in turn led us to advise a spectrum of actors that would otherwise have been far beyond our natural reach: from individuals(including former heads of state and prominent Silicon Valley CEOs) to companies, governments, central banks, and supranational institutions.</p>
-                                  < p > In short, we chose to optimize the long - term value of SciTheWorld, not its short - term revenue.</p>
-                                    < p > That choice has proven correct as we transparently explained in Advances in Agentic AI: Back to the Future.</p>
-                                      `
+      modalContent: this.ts.t().newVerticalSections[2].modalContent
     },
-    { id: 4, title: 'Two modes of engagement', subtitle: 'THE KEY IS TO INTERACT WITH THE CLIENT UNTIL THEY UNDERSTAND OUR NATURE AND QUALITY', backgroundColor: '#EECA46' },
+    { id: 4, title: this.ts.t().newVerticalSections[3].title, subtitle: this.ts.t().newVerticalSections[3].subtitle, backgroundColor: '#EECA46' },
     {
       id: 5,
-      title: 'Transformation bubbles',
-      subtitle: 'A SCALABLE PATH TO AI-NATIVITY',
+      title: this.ts.t().newVerticalSections[4].title,
+      subtitle: this.ts.t().newVerticalSections[4].subtitle,
       backgroundColor: '#FD5F65',
-      modalContent: `
-                                      < p > 41OPS delivers transformation through a proprietary approach called Transformation Bubbles.</p>
-                                        < p > A Transformation Bubble is a bounded, high - impact transformation unit that: </p>
-                                          < ul >
-                                          <li>can stand alone, </li>
-                                            < li > delivers measurable value fast, </li>
-                                              < li > and is designed to interconnect with future bubbles.</li>
-                                                </ul>
-                                                < p > Each bubble compounds into the next through network effects.</p>
-                                                  < h3 > SciTheWorld’s roadmap of transformation </h3>
-                                                    < p > Transformation Bubbles are deployed along a strict ladder: </p>
-                                                      < p style = "text-align: center; font-weight: 700; margin: 1rem 0;" > products → departments → companies → sectors → countries → society </p>
-                                                        < p > This is not optional.Skipping levels creates fragility, politics, and failure.</p>
-                                                          < p > 41OPS is one of the very few organizations that has already operated at the country level, through the Extreme - Efficient Nations methodology.</p>
-                                                            `
+      modalContent: this.ts.t().newVerticalSections[4].modalContent
     },
     {
       id: 6,
-      title: 'You can unplug us. By design',
-      subtitle: 'WE DON’T WANT TO BE YOUR NEXT DEPENDENCE',
+      title: this.ts.t().newVerticalSections[5].title,
+      subtitle: this.ts.t().newVerticalSections[5].subtitle,
       backgroundColor: '#A8D5BA',
-      modalContent: `
-                                                            < p > Our technology is strategy - driven and federated, in line with how the most advanced AI - native organizations operate.This architecture ensures that your intellectual property remains yours—whether it is created with us, independently, or in collaboration with other partners.</p>
-                                                              < p > What this means in practice is simple but fundamental: </p>
-                                                                < ul >
-                                                                <li>you own the strategies, </li>
-                                                                  < li > you own their constituent components(we help you aggregate AI services from third parties by design), </li>
-                                                                    < li > and you retain the ability to rebuild or operate them without us.</li>
-                                                                      </ul>
-                                                                      < p > We explicitly design and deliver projects so that clients can decouple from us if they choose to.In fact, we recommend this as a best practice on your key workflows(e.g.regulation) for business continuity and risk management.</p>
-                                                                        < p > There is, however, an important distinction to understand.</p>
-                                                                          < p > If you remove our platform, the strategies remain executable because the code is standardized and portable.You will continue to be effective at the strategic level.</p>
-                                                                            < p > What you will no longer have is the same level of efficiency.</p>
-                                                                              < p > That efficiency comes from what our platform provides behind the scenes: </p>
-                                                                                < ul >
-                                                                                <li>architectural flexibility, </li>
-                                                                                  < li > advanced cybersecurity, </li>
-                                                                                    < li > dynamic federation, </li>
-                                                                                      < li > operational resilience, </li>
-                                                                                        < li > and long - term evolvability.</li>
-                                                                                          </ul>
-                                                                                          < p > In short: you can leave at any time without losing control of your strategy.What you choose to leave behind is infrastructure - level efficiency, not intellectual property.</p>
-                                                                                            `
+      modalContent: this.ts.t().newVerticalSections[5].modalContent
     },
-    { id: 7, title: 'Two speeds in transformation', subtitle: 'OFTEN BOTH CO-LIVE', backgroundColor: '#F4A261' },
+    { id: 7, title: this.ts.t().newVerticalSections[6].title, subtitle: this.ts.t().newVerticalSections[6].subtitle, backgroundColor: '#F4A261' },
     {
       id: 8,
-      title: 'Extreme-efficient ecosystems',
-      subtitle: 'OUR AGENTS DO NOT KNOW LIMITS',
+      title: this.ts.t().newVerticalSections[7].title,
+      subtitle: this.ts.t().newVerticalSections[7].subtitle,
       backgroundColor: '#9B59B6',
-      modalContent: `
-                                                                                            < p > Our Transformation Bubbles are designed to scale both within a single organization and across multiple organizations.</p>
-                                                                                              < p > In practice, this means that we do not transform companies, sectors, or countries as isolated entities.We build ad - hoc ecosystems.</p>
-                                                                                                < p > Behind the scenes, Algorithmization operates at the ecosystem level.Organizational boundaries are treated as constraints to be managed—not as the unit of transformation.</p>
-                                                                                                  < p > These ecosystems can take multiple forms: </p>
-                                                                                                    < h3 > Within the same company or group </h3>
-                                                                                                      < p > From SMEs to global groups.Whether the departments are considered the ecosystem or it is the different local companies from a group.Here, transformation bubbles expand by compounding internal network effects.</p>
-                                                                                                        < p > When combined with SystematicMe’s training and judgment - building layer, these ecosystem - based transformations achieve a level of robustness and durability that is rarely observed in conventional AI initiatives.</p>
-                                                                                                          < p > Transformation becomes not only scalable—but resilient.</p>
-
-                                                                                                            < h3 > Across multiple independent companies </h3>
-                                                                                                              < h4 > Portfolios under a single owner(e.g.Private Equity) </h4>
-                                                                                                                < p > This unlocks a new transformation frontier: </p>
-                                                                                                                  < ul >
-                                                                                                                  <li>smarter selection through AI - informed analysis, </li>
-                                                                                                                    < li > faster AI - native transformation due to reduced internal political friction, </li>
-                                                                                                                      < li > and, more subtly, cross - company interoperability, enabling collaborations across portfolio companies that generate orthogonal value previously inaccessible.</li>
-                                                                                                                        </ul>
-                                                                                                                        < h4 > Companies under different owners </h4>
-                                                                                                                          < ul >
-                                                                                                                          <li>sector associations, </li>
-                                                                                                                            < li > regional ecosystems, </li>
-                                                                                                                              < li > initiatives to revitalize depressed regions within a country.</li>
-                                                                                                                                </ul>
-                                                                                                                                < p > In these cases, Algorithmization enables coordination and efficiency gains that no single entity could achieve independently.</p>
-                                                                                                                                  `
+      modalContent: this.ts.t().newVerticalSections[7].modalContent
     },
   ]);
 
-  engagementModesList = signal<CollapsibleItem[]>([
+  engagementModesList = computed<CollapsibleItem[]>(() => [
     {
-      title: 'Open projects',
+      title: this.ts.t().engagementModes[0].title,
       subtitle: '',
-      content: 'In open projects, the client drives the initiative.\n41OPS provides senior professionals selected not only for technical skill, but—critically—for attitude, judgment, and execution discipline.\nBeyond staffing, we introduce an additional layer of value:\n• rigorous project management,\n\n• architectural awareness,\n\n• and leverage of our internal technology to increase delivery reliability.\n\nThis model has repeatedly proven effective as a trust-building mechanism, often serving as the entry point toward deeper, closed-scope transformations.',
+      content: this.ts.t().engagementModes[0].content,
       image: ''
     },
     {
-      title: 'Closed Projects',
+      title: this.ts.t().engagementModes[1].title,
       subtitle: '',
-      content: 'In closed projects, 41OPS drives the transformation.\nHere, the mandate is explicit: address a clearly identified structural need and turn Algorithmization into operational reality. These engagements typically leverage Fractal and Alpha Dynamics to deliver AI-nativity inside organizations.\nIn this context, it is important to be precise:\n| 41OPS does not merely sell AI projects.\n\nIt delivers AI-nativization: the redesign of operations, workflows, and infrastructures so that intelligence becomes:\n• structural rather than cosmetic,\n\n• governable rather than opaque,\n\n• economically efficient rather than integration-heavy.\n\nThis is the difference between deploying AI and becoming AI-native.\nMore eloquently, we don’t only sell the sticks to grasp the low hanging fruits. We add the scaffolding that allows you also reach the mid and high hanging ones.',
+      content: this.ts.t().engagementModes[1].content,
       image: ''
     }
   ]);
 
-  transformationSpeedsList = signal<CollapsibleItem[]>([
+  transformationSpeedsList = computed<CollapsibleItem[]>(() => [
     {
-      title: 'Gradual transformation (inside the organization)',
+      title: this.ts.t().transformationSpeeds[0].title,
       subtitle: '',
-      content: 'For organizations that want to evolve their core safely:\n• We start with selected products or departments.\n\n• We redesign workflows, decision paths, and infrastructure.\n\n• We deploy Custom SaaS powered by SciTheWorld platforms.\n\n• We progressively interconnect bubbles across the organization.\n\nThe result is controlled compounding, not disruption theatre.',
+      content: this.ts.t().transformationSpeeds[0].content,
       image: ''
     },
     {
-      title: 'One-go transformation (speedboats as joint ventures)',
+      title: this.ts.t().transformationSpeeds[1].title,
       subtitle: '',
-      content: 'When internal politics, legacy incentives, or governance slow transformation:\n• We create speedboats: joint ventures or parallel entities.\n\n• These entities operate AI-native from day one.\n\n• Learnings are then inherited by the parent organization.\n\nThis approach is particularly effective for:\n• regulated industries,\n\n• large incumbents,\n\n• and private-equity-backed transformations.',
+      content: this.ts.t().transformationSpeeds[1].content,
       image: ''
     }
   ]);
 
   /* ── 7 vertical sections (OLD - Kept reference but unused in template) ── */
-  verticalSections = signal<SectionData[]>([
+  verticalSections = computed<SectionData[]>(() => [
     {
       id: 1,
-      title: 'Why Algorithmization exists',
-      subtitle: 'WE SAW THE NEED A DECADE BEFORE INDUSTRY AND ACADEMIA',
+      title: this.ts.t().oldVerticalSections[0].title,
+      subtitle: this.ts.t().oldVerticalSections[0].subtitle,
       backgroundColor: '#4AB5EA',
-      modalContent: '<p>Most AI projects fail not because AI is immature, but because organizations are not designed to absorb intelligence.</p><p>Algorithmization exists to solve that structural problem.</p><p>It is not about using more AI.</p><p>It is about becoming an algorithmic system.</p>'
+      modalContent: this.ts.t().oldVerticalSections[0].modalContent
     },
     {
       id: 2,
-      title: 'A NEW DISCIPLINE',
-      subtitle: 'WHAT IT IS',
+      title: this.ts.t().oldVerticalSections[1].title,
+      subtitle: this.ts.t().oldVerticalSections[1].subtitle,
       backgroundColor: '#FA715E',
-      modalContent: `< p style = "margin-bottom: 2rem;" > Algorithmization is a new applied - science discipline focused on advanced transformation.</p>
-  < p style = "margin-bottom: 2rem;" > Its objective is not to “add AI” to organizations, but to re - architect them so that decision - making, operations, and innovation become algorithmic by design—precise, governable, and economically grounded.</p>
-    < p > In an Algorithmized organization: </p>
-      < ul style = "display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2rem;" >
-        <li>improvements compound daily, </li>
-          < li > transformation is no longer episodic, </li>
-            < li > and competitive advantage is structural, not tool - dependent.</li>
-              </ul>
-              < p > Algorithmization is the intellectual backbone of SciTheWorld and the foundation upon which its platforms, methodologies, and spin - offs are built.</p>`
+      modalContent: this.ts.t().oldVerticalSections[1].modalContent
     },
-    { id: 3, title: 'THE 3 KNOWLEDGE PILLARS', subtitle: '', backgroundColor: '#4CD6BC' },
+    { id: 3, title: this.ts.t().oldVerticalSections[2].title, subtitle: '', backgroundColor: '#4CD6BC' },
     {
       id: 4,
-      title: 'THE MISSION',
-      subtitle: 'APPLIED SCIENCE IS NOT SCIENCE APPLIED',
+      title: this.ts.t().oldVerticalSections[3].title,
+      subtitle: this.ts.t().oldVerticalSections[3].subtitle,
       backgroundColor: '#EECA46',
-      modalContent: `<p>Algorithmization follows a strict scientific–industrial loop:</p>
-<h3 style="margin: 1rem 0; text-align: center; font-size: 1.25em;">Invent → Formalize → Prove → Industrialize</h3>
-<p>This sequence is non-negotiable.</p>
-<ul>
-<li><strong>Invent</strong><br>Identify structural inefficiencies and missing paradigms at the intersection of economics, AI, and architecture.</li>
-<li><strong>Formalize</strong><br>Translate invention into theory, methodologies, and architectures that can be taught, audited, and replicated.</li>
-<li><strong>Prove</strong><br>Stress-test the theory in real industrial environments, under real constraints: cost, latency, governance, compliance, and failure.</li>
-<li><strong>Industrialize</strong><br>Embed the proven theory into platforms, standards, and operating models that scale beyond individuals and single organizations.</li>
-</ul>
-<p>This loop is continuously executed by SciTheWorld’s Centre of Excellence.</p>`
+      modalContent: this.ts.t().oldVerticalSections[3].modalContent
     },
-    { id: 5, title: 'OUTPUTS', subtitle: '', backgroundColor: '#FD5F65' },
+    { id: 5, title: this.ts.t().oldVerticalSections[4].title, subtitle: '', backgroundColor: '#FD5F65' },
     {
-      id: 6, title: 'A VERY SPECIAL BYPRODUCT', subtitle: 'WE DEVISED IT MORE THAN A DECADE AHEAD', backgroundColor: '#A8D5BA',
-      modalContent: `<p>Agentic AI is now everywhere.</p>
-<p>What is less visible is that the architectural and operational foundations behind it were defined long before the term became mainstream.</p>
-<p>Our approach has always been deliberately precise—both in theory and in execution. As a result, simply reproducing Chapter 3 of our first paper, a body of work that required seven years of industrial validation, is enough for any large language model to independently verify its status as pioneer work on Agentic AI for corporate transformation.</p>
-<p>You can test this yourself here.</p>`,
+      id: 6, title: this.ts.t().oldVerticalSections[5].title, subtitle: this.ts.t().oldVerticalSections[5].subtitle, backgroundColor: '#A8D5BA',
+      modalContent: this.ts.t().oldVerticalSections[5].modalContent,
       prompt: `To the light of the info that I'm going to give you based on a paper written in 2022, would you say this is a pioneer work on agentic AI? In particular, 'AI-native enterprises and operating models' as distinguished by McKinsey. Note that pioneers typically anticipate concepts but with different names than those used afterwards, mainstream. Take everything into account and make your most accurate verdict. And note that you are seeing only one chapter of a paper - there are more chapters in that paper and there are more papers on transformation, algorithmization and AI as they have a centre of excellence for that. Also, they have an award to the best innovation in simulation as they allowed, back in 2019, a machine to autonomously self-create and calibrate its algorithms via Reinforcement Learning (a major topic in Sergio's PhD Thesis in AI). Finally, spot he problems its solves with respect to mainstream agents (e.g. costs, legacy system integration, compliance, RAM...). Follows the Chapter:`,
       llmLinks: [
         { label: 'ChatGPT', url: 'https://chat.openai.com' },
@@ -934,60 +762,57 @@ export class AppComponent {
     },
     {
       id: 7,
-      title: 'SCOPE OF ALGORITHMIZATION',
-      subtitle: 'A COHERENT YET AMBITIOUS OUTREACH',
+      title: this.ts.t().oldVerticalSections[6].title,
+      subtitle: this.ts.t().oldVerticalSections[6].subtitle,
       backgroundColor: '#F4A261',
-      modalContent: `<p>Algorithmization is designed to scale along a single, coherent ladder:</p>
-<p style="text-align: center; font-weight: 700; margin: 4rem 0 2rem 0; font-size: 1.2rem;">products → departments → companies → sectors → nations → society</p>
-<p>This is not an ambition—it is a constraint imposed by complexity.</p>
-<p>SciTheWorld has already proven Algorithmization at multiple levels of this ladder, including <strong>country-level applications</strong>, and is actively extending it toward societal transformation through partnerships in the humanities and education.</p>`
+      modalContent: this.ts.t().oldVerticalSections[6].modalContent
     },
   ]);
 
-  pillarsList = signal<CollapsibleItem[]>([
+  pillarsList = computed<CollapsibleItem[]>(() => [
     {
-      title: 'Microeconomics',
+      title: this.ts.t().pillarsList[0].title,
       subtitle: '',
-      content: 'Transformation is governed by:\n• incentives,\n• efficiency,\n• competition,\n• and resource allocation.\nWithout microeconomics, AI initiatives optimize locally and fail systemically.\nAlgorithmization uses microeconomic reasoning to decide what should be automated, when, and why.',
+      content: this.ts.t().pillarsList[0].content,
       image: ''
     },
     {
-      title: 'AI / Machine Learning',
+      title: this.ts.t().pillarsList[1].title,
       subtitle: '',
-      content: 'Algorithmization treats AI correctly:\n• a model is not a solution,\n\n• intelligence emerges from the orchestration of multiple models,\n\n• expert heuristics and governance are first-class components.\n\nThis is why Algorithmization anticipated Agentic AI for AI-native enterprises and operations long before it became industry terminology.',
+      content: this.ts.t().pillarsList[1].content,
       image: ''
     },
     {
-      title: 'Deeptech Software Design',
+      title: this.ts.t().pillarsList[2].title,
       subtitle: '',
-      content: 'AI cannot scale without architecture.\nAlgorithmization embeds:\n• modularity,\n\n• federation,\n\n• resilience,\n\n• security,\n\n• and long-term evolvability\n\ninto the core design of systems.\nDeeptech design is what allows Algorithmization to move from prototypes to nation-scale transformation.',
+      content: this.ts.t().pillarsList[2].content,
       image: ''
     }
   ]);
 
-  outputsList = signal<CollapsibleItem[]>([
+  outputsList = computed<CollapsibleItem[]>(() => [
     {
-      title: 'Papers',
+      title: this.ts.t().outputsList[0].title,
       subtitle: '',
-      content: 'Formal research and white papers that:\n• define new architectural paradigms (e.g. Data MAPs),\n\n• introduce new transformation logics (e.g. on-platform organizations),\n\n• extend Algorithmization into finance, cybersecurity, geostrategy, and society.\n\nThese papers describe theory that has already been proven in production, not speculative futures.',
+      content: this.ts.t().outputsList[0].content,
       image: ''
     },
     {
-      title: 'Architectures',
+      title: this.ts.t().outputsList[1].title,
       subtitle: '',
-      content: 'Reusable architectural patterns that break complex systems into smart, federated, governable units—enabling what is now called Agentic AI in enterprise contexts.\nAlgorithmization approaches architecture as a strategic asset, not an implementation detail.',
+      content: this.ts.t().outputsList[1].content,
       image: ''
     },
     {
-      title: 'Standards and methodologies',
+      title: this.ts.t().outputsList[2].title,
       subtitle: '',
-      content: 'Operational frameworks that allow organizations to:\n• govern AI and automation with precision,\n\n• control transformation economics,\n\n• avoid vendor-driven architectural convergence.\n\nThese standards are increasingly aligned with global regulatory and institutional efforts.',
+      content: this.ts.t().outputsList[2].content,
       image: ''
     },
     {
-      title: 'Platforms',
+      title: this.ts.t().outputsList[3].title,
       subtitle: '',
-      content: 'Industrial-grade platforms where Algorithmization is executed in production:\n• Fractal — AI-native, end-to-end corporate technology.\n\n• Alpha Dynamics — AI-native investment and decision-making infrastructure.\n\nPlatforms are not endpoints; they are living laboratories of the discipline.',
+      content: this.ts.t().outputsList[3].content,
       image: ''
     }
   ]);
@@ -1077,18 +902,18 @@ export class AppComponent {
     this.currentSection.set(index);
   }
 
-  academicPartners = signal<AcademicPartner[]>([
+  academicPartners = computed<AcademicPartner[]>(() => [
     {
-      institution: 'University College London',
-      partnership: 'Foundations in AI, Machine Learning, and computational rigor.'
+      institution: this.ts.t().academicPartners.partners[0].institution,
+      partnership: this.ts.t().academicPartners.partners[0].partnership,
     },
     {
-      institution: 'ICADE',
-      partnership: 'Asset management, finance, and applied economic systems.'
+      institution: this.ts.t().academicPartners.partners[1].institution,
+      partnership: this.ts.t().academicPartners.partners[1].partnership,
     },
     {
-      institution: 'IE University',
-      partnership: 'Humanities, societal impact, culture, and the human dimension of AI.'
+      institution: this.ts.t().academicPartners.partners[2].institution,
+      partnership: this.ts.t().academicPartners.partners[2].partnership,
     }
   ]);
 

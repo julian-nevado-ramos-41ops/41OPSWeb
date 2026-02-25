@@ -1,5 +1,6 @@
-import { Component, OnInit, signal, viewChild, ElementRef, afterNextRender } from '@angular/core';
+import { Component, OnInit, signal, viewChild, ElementRef, afterNextRender, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../i18n';
 
 @Component({
   selector: 'app-preloader',
@@ -10,8 +11,8 @@ import { CommonModule } from '@angular/common';
       <div class="loader-container">
         <!-- Text Above Line -->
         <div class="text-top-container">
-          <div class="revealing-text left" [class.visible]="showText()">WE</div>
-          <div class="revealing-text right" [class.visible]="showText()">ARE</div>
+          <div class="revealing-text left" [class.visible]="showText()">{{ ts.t().preloader.textLeft }}</div>
+          <div class="revealing-text right" [class.visible]="showText()">{{ ts.t().preloader.textRight }}</div>
         </div>
 
         <div class="vertical-line">
@@ -130,6 +131,7 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class PreloaderComponent implements OnInit {
+  readonly ts = inject(TranslationService);
   progress = signal(0);
   isComplete = signal(false);
   showText = signal(false);

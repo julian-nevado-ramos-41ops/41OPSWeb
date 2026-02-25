@@ -1,5 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../i18n/translation.service';
 
 interface Logo {
   src: string;
@@ -14,7 +15,7 @@ interface Logo {
   template: `
     <div class="carousel-header">
       <span class="bracket">[</span>
-      <h2 class="carousel-title">Brands that trust us</h2>
+      <h2 class="carousel-title">{{ ts.t().brands.title }}</h2>
       <span class="bracket">]</span>
       <!--<span class="arrow">▼</span>-->
     </div>
@@ -182,6 +183,7 @@ interface Logo {
   encapsulation: ViewEncapsulation.None
 })
 export class LogoCarouselComponent {
+  public ts = inject(TranslationService);
   transforms: { [key: number]: { x: number, y: number } } = {};
   hoveredIndex: number | null = null;
   isPaused = false;

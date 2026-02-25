@@ -160,6 +160,12 @@ export class AccordionComponent implements AfterViewInit, OnDestroy {
     /** Enable scroll snap alignment on the host element */
     scrollSnap = input(false, { transform: booleanAttribute });
 
+    testimonialsLabel = input<string>('Testimonials:');
+    copyPromptLabel = input<string>('');
+    copyButtonLabel = input<string>('Copy prompt');
+    copiedButtonLabel = input<string>('Copied!');
+    llmSectionLabel = input<string>('Then, check on the different LLMs:');
+
     // ─── Internal State ────────────────────────────────────
     /** Scroll progress for scroll mode: 0 = collapsed (minWidth), 1 = expanded (maxWidth) */
     expansionProgress = signal(0);

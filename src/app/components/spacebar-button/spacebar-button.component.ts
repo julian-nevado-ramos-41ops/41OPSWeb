@@ -31,13 +31,22 @@ export class SpacebarButtonComponent implements OnDestroy {
   isPressed = signal(false);
   private pressTimer: ReturnType<typeof setTimeout> | null = null;
   private readonly ANIMATION_DURATION = 1000;
+  /** Tracks whether THIS button initiated the current spacebar press */
+  private isHandlingPress = false;
 
   private keydownHandler = (event: KeyboardEvent) => {
     if (event.code === 'Space') {
-      // Only respond if this button's parent container is in view
-      if (!this.isInView()) return;
+      // If this button initiated the current press, keep preventing default
+      // even after navigating (e.g. to the last section which has no button)
+      if (this.isHandlingPress && event.repeat) {
+        event.preventDefault();
+        return;
+      }
+      // Only respond if this button's section is the active one and parent container is in view
+      if (!this.isCurrentSection() || !this.isInView()) return;
       event.preventDefault();
       if (!event.repeat) {
+        this.isHandlingPress = true;
         this.startPress(event);
       }
     }
@@ -45,6 +54,7 @@ export class SpacebarButtonComponent implements OnDestroy {
 
   private keyupHandler = (event: KeyboardEvent) => {
     if (event.code === 'Space') {
+      this.isHandlingPress = false;
       this.cancelPress();
     }
   };
@@ -62,6 +72,34 @@ export class SpacebarButtonComponent implements OnDestroy {
     if (this.pressTimer) {
       clearTimeout(this.pressTimer);
     }
+  }
+
+  /** Check if this button's section is the currently active section in its container */
+  private isCurrentSection(): boolean {
+    // Walk up to find the parent app-section
+    let sectionEl: HTMLElement | null = this.elementRef.nativeElement;
+    while (sectionEl && sectionEl.tagName !== 'APP-SECTION') {
+      sectionEl = sectionEl.parentElement;
+    }
+    if (!sectionEl) return false;
+
+    // Walk up to find the parent app-sections-container
+    let containerEl: HTMLElement | null = sectionEl;
+    while (containerEl && containerEl.tagName !== 'APP-SECTIONS-CONTAINER') {
+      containerEl = containerEl.parentElement;
+    }
+    if (!containerEl) return false;
+
+    // Find this section's index among its sibling sections
+    const allSections = Array.from(containerEl.querySelectorAll(':scope > * app-section'));
+    // For horizontal containers, also check direct children
+    const sections = allSections.length > 0 ? allSections : Array.from(containerEl.querySelectorAll('app-section'));
+    const myIndex = sections.indexOf(sectionEl);
+
+    // Check which section currently has the 'visible' class
+    const visibleIndex = sections.findIndex(s => s.classList.contains('visible'));
+
+    return myIndex === visibleIndex;
   }
 
   /** Check if the parent sections-container is visible in the viewport center */

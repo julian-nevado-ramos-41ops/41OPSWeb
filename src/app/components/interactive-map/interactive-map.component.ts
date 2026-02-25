@@ -29,6 +29,9 @@ export interface MapMarker {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './interactive-map.component.html',
   styleUrls: ['./interactive-map.component.css'],
+  host: {
+    '(click)': '$event.stopPropagation()',
+  },
 })
 export class InteractiveMapComponent implements AfterViewInit, OnDestroy {
   /** Array of map markers to display */

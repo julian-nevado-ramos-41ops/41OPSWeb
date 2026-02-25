@@ -46,12 +46,14 @@
                             <!-- Prompt copy section -->
                             @if (card.prompt) {
                             <div class="prompt-section">
-                                <span class="scroll-card-description">First, copy the prompt:</span>
+                                @if (copyPromptLabel()) {
+                                <span class="scroll-card-description">{{ copyPromptLabel() }}</span>
+                                }
                                 <button class="copy-btn" (click)="copyPrompt(card.prompt!, $event)">
                                     @if (copied()) {
-                                    <span class="copy-icon">✓</span> Copied!
+                                    <span class="copy-icon">✓</span> {{ copiedButtonLabel() }}
                                     } @else {
-                                    <span class="copy-icon">📋</span> Copy prompt
+                                    <span class="copy-icon">📋</span> {{ copyButtonLabel() }}
                                     }
                                 </button>
                             </div>
@@ -60,7 +62,7 @@
                             <!-- LLM links section -->
                             @if (card.llmLinks?.length) {
                             <div class="llm-section">
-                                <span class="scroll-card-description">Then, check on the different LLMs:</span>
+                                <span class="scroll-card-description">{{ llmSectionLabel() }}</span>
                                 <div class="llm-buttons">
                                     @for (link of card.llmLinks; track link.label) {
                                     <button class="llm-btn" (click)="openLlmLink(link.url, $event)">
@@ -76,7 +78,7 @@
                         <!-- Testimonials section -->
                         @if (card.testimonials?.length) {
                         <div class="testimonials-section">
-                            <span class="scroll-card-description testimonials-title">Testimonials:</span>
+                            <span class="scroll-card-description testimonials-title">{{ testimonialsLabel() }}</span>
                             @for (testimonial of card.testimonials; track testimonial.name) {
                             <div class="testimonial-item">
                                 <div class="testimonial-author">{{ testimonial.name }} <span

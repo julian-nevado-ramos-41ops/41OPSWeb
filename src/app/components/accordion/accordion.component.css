@@ -186,7 +186,8 @@
 
 .card-content h2 {
     font-size: clamp(1.2rem, 8.5cqi, 2.5rem);
-    font-weight: 400;
+    font-weight: normal;
+    font-synthesis: none;
     margin: 0 0 1.5rem 0;
     font-family: 'Bebas Neue', 'Impact', sans-serif;
     color: #ffffff;
@@ -477,9 +478,8 @@
     transform-origin: 0 50%;
     transform: rotate(-90deg);
     white-space: nowrap;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     font-weight: 500;
-    font-family: 'Bebas Neue', 'Impact', sans-serif;
     color: #ffffff;
     opacity: 0;
     pointer-events: none;
