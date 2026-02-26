@@ -104,8 +104,19 @@ export interface Translations {
         isoText: string;
     };
     cookieBanner: {
+        title: string;
         text: string;
-        accept: string;
+        customizeBtn: string;
+        rejectBtn: string;
+        acceptBtn: string;
+        saveBtn: string;
+        categories: {
+            necessary: { name: string; description: string; label: string };
+            analytics: { name: string; description: string };
+            marketing: { name: string; description: string };
+        };
+        on: string;
+        off: string;
     };
     preloader: {
         textLeft: string;

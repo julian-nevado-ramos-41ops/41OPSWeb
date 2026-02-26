@@ -542,8 +542,19 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         isoText: 'Members of both groups: AI and Web3 &amp; Metaverse',
     },
     cookieBanner: {
-        text: 'Utilizamos cookies para mejorar tu experiencia. Al continuar visitando este sitio, aceptas nuestro uso de cookies.',
-        accept: 'Aceptar',
+        title: 'Cookie settings',
+        text: 'Our website uses cookies to distinguish you from other users. This helps us provide you with a more personalized experience when browsing our site and also allows us to improve it. You can choose not to allow some types of cookies.',
+        customizeBtn: 'Customize cookies',
+        rejectBtn: 'Reject all',
+        acceptBtn: 'Accept all',
+        saveBtn: 'Save preferences',
+        categories: {
+            necessary: { name: 'Necessary', description: 'Enable security and basic functionality.', label: 'Required' },
+            analytics: { name: 'Analytics', description: 'Allow site performance tracking.' },
+            marketing: { name: 'Marketing', description: 'Enable tracking and ad personalization.' }
+        },
+        on: 'Yes',
+        off: 'No'
     },
     preloader: {
         textLeft: 'WE',

@@ -536,8 +536,19 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         isoText: 'Miembros de ambos grupos: IA y Web3 & Metaverso.',
     },
     cookieBanner: {
-        text: 'Utilizamos cookies para mejorar tu experiencia. Al continuar visitando este sitio, aceptas nuestro uso de cookies.',
-        accept: 'Aceptar',
+        title: 'Configuración de cookies',
+        text: 'Nuestro sitio web utiliza cookies para distinguirle de otros usuarios. Esto nos ayuda a ofrecerle una experiencia más personalizada al navegar por nuestro sitio y también nos permite mejorarlo. Puede optar por no permitir algunos tipos de cookies.',
+        customizeBtn: 'Personalizar cookies',
+        rejectBtn: 'Rechazar todas',
+        acceptBtn: 'Aceptar todas',
+        saveBtn: 'Guardar preferencias',
+        categories: {
+            necessary: { name: 'Necesarias', description: 'Habilitan la seguridad y funcionalidad básica.', label: 'Obligatorias' },
+            analytics: { name: 'Analíticas', description: 'Permiten el seguimiento del rendimiento del sitio.' },
+            marketing: { name: 'Marketing', description: 'Habilitan la personalización de anuncios y seguimiento.' }
+        },
+        on: 'Sí',
+        off: 'No'
     },
     preloader: {
         textLeft: 'WE',
