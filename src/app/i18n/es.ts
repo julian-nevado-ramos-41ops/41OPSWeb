@@ -28,7 +28,7 @@ export const ES: Translations = {
         cards: [
             {
                 title: 'NACIÓN DE EFICIENCIA-EXTREMA',
-                description: 'En 2025, nos convertimos en la primera compañía en la que se confió para transformar un país entero: España.\n\nSe basó en nuestro <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5136657" target="_blank">informe de geoestrategia e IA</a> e involucró al Ministerio de Economía (orientación de abajo hacia arriba de la política económica).\n\nLo primero fue establecer una metodología para ayudar a todas las empresas a detectar y priorizar sus proyectos de transformación. De hecho, ése es uno de los desafíos más complejos y menos avanzados por la industria hasta la fecha.',
+                description: 'En 2025, nos convertimos en la primera compañía en la que se confió para transformar un país entero: España.\n\nSe basó en nuestro <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5136657" target="_blank">informe de geoestrategia e IA</a> e involucró al Ministerio de Economía (orientación de abajo hacia arriba de la política económica); El agente de crédito de España (ICO); un think tank de referencia (Elcano) y la asociación de las principales empresas familiares (IEF).\n\nLo primero fue establecer una metodología para ayudar a todas las empresas a detectar y priorizar sus proyectos de transformación. De hecho, ése es uno de los desafíos más complejos y menos avanzados por la industria hasta la fecha.',
 
                 testimonials: [
                     {
