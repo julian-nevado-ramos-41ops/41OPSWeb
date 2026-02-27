@@ -1,22 +1,32 @@
-<div class="snake-container">
-    <div class="header">
-        <h1 class="title">SNAKE</h1>
-        <div class="score">Score: {{ score }}</div>
+<div class="snake-page-container">
+    <div class="side-image left-image">
+        <img src="/ric-removebg-preview.png" alt="Ric" />
     </div>
 
-    <div class="game-area">
-        <canvas #snakeBoard width="400" height="400" class="snake-canvas"></canvas>
-
-        @if (gameOver) {
-        <div class="game-over-overlay">
-            <h2>GAME OVER</h2>
-            <p>Final Score: {{ score }}</p>
-            <button class="restart-btn" (click)="resetGame()">Restart</button>
+    <div class="snake-container">
+        <div class="header">
+            <h1 class="title">SNAKE</h1>
+            <div class="score">Score: {{ score }}</div>
         </div>
-        }
+
+        <div class="game-area">
+            <canvas #snakeBoard width="400" height="400" class="snake-canvas"></canvas>
+
+            @if (gameOver) {
+            <div class="game-over-overlay">
+                <h2>GAME OVER</h2>
+                <p>Final Score: {{ score }}</p>
+                <button class="restart-btn" (click)="resetGame()">Restart</button>
+            </div>
+            }
+        </div>
+
+        <div class="controls-hint">
+            Use W,A,S,D or Arrow Keys to move
+        </div>
     </div>
 
-    <div class="controls-hint">
-        Use W,A,S,D or Arrow Keys to move
+    <div class="side-image right-image">
+        <img src="/mig-removebg-preview.png" alt="Mig" />
     </div>
 </div>
