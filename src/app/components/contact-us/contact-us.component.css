@@ -57,6 +57,11 @@
     line-height: 1.5;
 }
 
+.easter-egg {
+    cursor: pointer;
+    transition: text-shadow 0.3s ease;
+}
+
 .linkedin-link {
     display: inline-flex;
     align-items: center;

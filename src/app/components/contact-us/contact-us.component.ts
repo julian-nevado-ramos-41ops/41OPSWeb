@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TranslationService } from '../../i18n';
 
 @Component({
@@ -13,6 +14,7 @@ import { TranslationService } from '../../i18n';
 })
 export class ContactUsComponent {
     readonly ts = inject(TranslationService);
+    private readonly router = inject(Router);
     linkedinUrl = input<string>('https://es.linkedin.com/company/scitheworld');
     mapUrl = input<string>('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.215569477028!2d-3.6761081!3d40.448518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4228e939d8888b%3A0x6a0c56e30096956!2sC.%20de%20Pradillo%2C%2068%2C%20Chamart%C3%ADn%2C%2028002%20Madrid!5e0!3m2!1ses!2ses!4v1740000000000!5m2!1ses!2ses');
 
@@ -28,5 +30,9 @@ export class ContactUsComponent {
 
     openLinkedin() {
         window.open(this.linkedinUrl(), '_blank', 'noopener,noreferrer');
+    }
+
+    navigateToSnake() {
+        this.router.navigate(['/snake']);
     }
 }

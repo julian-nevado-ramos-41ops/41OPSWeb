@@ -6,7 +6,12 @@
 
             <div class="address-block">
                 @for (line of ts.t().contactUs.addressLines; track $index) {
+                @if (line.includes('28002')) {
+                <p class="address-line"><span class="easter-egg" (click)="navigateToSnake()">28002</span>{{
+                    line.split('28002')[1] }}</p>
+                } @else {
                 <p class="address-line">{{ line }}</p>
+                }
                 }
             </div>
 

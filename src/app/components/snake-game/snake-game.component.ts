@@ -86,7 +86,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         if (!this.ctx) return;
         const canvas = this.canvasRef()?.nativeElement;
         if (canvas) {
-            this.ctx.fillStyle = '#111'; // Dark background
+            this.ctx.fillStyle = '#111';
             this.ctx.strokeStyle = '#333';
             this.ctx.fillRect(0, 0, canvas.width, canvas.height);
             this.ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -97,7 +97,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         if (!this.ctx) return;
         this.snake.forEach((part, index) => {
             if (!this.ctx) return;
-            this.ctx.fillStyle = index === 0 ? '#0f0' : '#0c0'; // Neon green
+            this.ctx.fillStyle = index === 0 ? '#0f0' : '#0c0';
             this.ctx.strokeStyle = '#000';
             this.ctx.fillRect(part.x, part.y, this.gridSize, this.gridSize);
             this.ctx.strokeRect(part.x, part.y, this.gridSize, this.gridSize);
@@ -112,7 +112,6 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         if (hasEatenFood) {
             this.score += 10;
             this.spawnFood();
-            // Increase speed slightly up to a limit
             if (this.currentSpeed > 50) {
                 this.currentSpeed -= 2;
             }
@@ -123,7 +122,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
     private drawFood(): void {
         if (!this.ctx) return;
-        this.ctx.fillStyle = '#f00'; // Red food
+        this.ctx.fillStyle = '#f00';
         this.ctx.strokeStyle = '#000';
         this.ctx.fillRect(this.food.x, this.food.y, this.gridSize, this.gridSize);
         this.ctx.strokeRect(this.food.x, this.food.y, this.gridSize, this.gridSize);
@@ -140,7 +139,6 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         this.food.x = this.randomTen(0, canvas.width - this.gridSize);
         this.food.y = this.randomTen(0, canvas.height - this.gridSize);
 
-        // If spawned on snake, respawn
         this.snake.forEach((part) => {
             const hasEaten = part.x === this.food.x && part.y === this.food.y;
             if (hasEaten) {
@@ -171,7 +169,6 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
     handleKeyDown(event: KeyboardEvent): void {
         if (this.changingDirection) return;
 
-        // Prevent default scrolling for arrow keys and space
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
             event.preventDefault();
         }
