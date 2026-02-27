@@ -22,7 +22,7 @@
 
 /* Override Leaflet default styles */
 :host ::ng-deep .leaflet-container {
-    background: #1a1a1a;
+    background: #e5e0d8;
 }
 
 :host ::ng-deep .leaflet-control-attribution {
