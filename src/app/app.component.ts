@@ -1,5 +1,5 @@
-// Trigger re-compilation
 import { Component, ChangeDetectionStrategy, signal, computed, inject, viewChild } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeroComponent } from './components/hero/hero.component';
 import { SectionsContainerComponent } from './components/sections-container/sections-container.component';
 import { SectionComponent } from './components/section/section.component';
@@ -61,11 +61,13 @@ interface SectionData {
 
     AccordionComponent,
     FooterComponent,
-    CookieBannerComponent
+    CookieBannerComponent,
+    RouterOutlet
   ],
 
   template: `
-    <app-preloader />
+    @if (router.url !== '/snake') {
+      <app-preloader />
     <app-cursor-follower />
     <app-hud-overlay />
 
@@ -266,6 +268,9 @@ interface SectionData {
     }
 
     <app-cookie-banner />
+    }
+    
+    <router-outlet />
   `,
 
   styles: [`
@@ -485,6 +490,7 @@ interface SectionData {
 })
 export class AppComponent {
   readonly ts = inject(TranslationService);
+  readonly router = inject(Router);
   currentSection = signal(0);
 
   modalVisible = signal(false);
