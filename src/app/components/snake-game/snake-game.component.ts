@@ -158,9 +158,9 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         }
 
         const hitLeftWall = this.snake[0].x < 0;
-        const hitRightWall = this.snake[0].x > canvas.width - this.gridSize;
+        const hitRightWall = this.snake[0].x >= canvas.width;
         const hitToptWall = this.snake[0].y < 0;
-        const hitBottomWall = this.snake[0].y > canvas.height - this.gridSize;
+        const hitBottomWall = this.snake[0].y >= canvas.height;
 
         return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
     }

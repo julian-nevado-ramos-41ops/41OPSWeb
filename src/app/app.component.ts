@@ -29,6 +29,7 @@ interface SectionData {
   backgroundColor: string;
   textColor?: string;
   image?: string;
+  hoverImage?: string;
   secondaryImage?: string;
   modalContent?: string;
   prompt?: string;
@@ -131,6 +132,7 @@ interface SectionData {
           [backgroundColor]="section.backgroundColor"
           [navColor]="section.navColor || '#000000'"
           [image]="section.image"
+          [hoverImage]="section.hoverImage"
           [totalSections]="horizontalSections().length"
           [sectionIndex]="$index"
           [globalCurrentSection]="horizontalContainer.currentIndex()"
@@ -593,7 +595,7 @@ export class AppComponent {
   /* ── 2 horizontal sections (both black) ── */
   horizontalSections = computed<SectionData[]>(() => [
     { id: 1, title: this.ts.t().horizontalSections[0].title, subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit.png' },
-    { id: 2, title: this.ts.t().horizontalSections[1].title, subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit_messages_41OPS (1).png' },
+    { id: 2, title: this.ts.t().horizontalSections[1].title, subtitle: '', backgroundColor: '#000000', navColor: '#ffffff', image: 'img/toolkit/toolkit_messages_41OPS_white.png', hoverImage: 'img/toolkit/toolkit_messages_41OPS_red.png' },
   ]);
 
 
@@ -617,7 +619,7 @@ export class AppComponent {
       backgroundColor: '#457B9D',
       textColor: '#ffffff',
       image: 'img/sections/company_departments_bubbles.png',
-      secondaryImage: 'img/sections/company_departments_bubbles.png',
+      secondaryImage: 'img/sections/sticker_bot_head_jaime_AGI.png',
       modalContent: this.ts.t().aboutUsHorizontal[1].modalContent
     },
     {

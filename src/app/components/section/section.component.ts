@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, output, booleanAttribute, inject, signal } from '@angular/core';
 import { SectionIndicatorComponent } from '../section-indicator/section-indicator.component';
 import { SideNavComponent } from '../side-nav/side-nav.component';
 import { SpacebarButtonComponent } from '../spacebar-button/spacebar-button.component';
@@ -16,6 +16,8 @@ import { TranslationService } from '../../i18n/translation.service';
     '[style.background-color]': 'backgroundColor()',
     '[style.color]': 'textColor()',
     '[id]': '"section-" + id()',
+    '(mouseenter)': 'hovered.set(true)',
+    '(mouseleave)': 'hovered.set(false)',
   },
   template: `
     <div class="left-indicator">
@@ -39,8 +41,11 @@ import { TranslationService } from '../../i18n/translation.service';
           }
         </div>
         @if (image()) {
-          <div class="section-image-container">
-            <img [src]="image()" [alt]="title()" class="section-image">
+          <div class="section-image-container" [class.has-secondary]="secondaryImage()">
+            <img [src]="hovered() && hoverImage() ? hoverImage()! : image()!" [alt]="title()" class="section-image" [class.hoverable]="hoverImage()">
+            @if (secondaryImage()) {
+              <img [src]="secondaryImage()" [alt]="title() + ' overlay'" class="section-image-secondary">
+            }
           </div>
         }
       } @else {
@@ -289,11 +294,26 @@ import { TranslationService } from '../../i18n/translation.service';
       margin-right: -20%; /* Pull strongly to the right */
     }
 
+    .section-image-container.has-secondary {
+      position: relative;
+    }
+
     .section-image {
       max-width: 100%;
       max-height: 60vh; 
       height: auto;
       object-fit: contain;
+    }
+
+    .section-image-secondary {
+      position: absolute;
+      bottom: var(--secondary-bottom, -10%);
+      right: var(--secondary-right, -5%);
+      width: var(--secondary-width, 80%);
+      height: auto;
+      object-fit: contain;
+      z-index: 2;
+      pointer-events: none;
     }
 
     .section-mini-title {
@@ -362,6 +382,10 @@ import { TranslationService } from '../../i18n/translation.service';
         max-height: 40vh;
       }
 
+      .section-image-secondary {
+        width: var(--secondary-width-mobile, 40%);
+      }
+
       .content-slot {
         width: 100%;
       }
@@ -386,6 +410,7 @@ export class SectionComponent {
   title = input.required<string>();
   subtitle = input('');
   image = input<string | undefined>();
+  hoverImage = input<string | undefined>();
   backgroundColor = input('var(--color-1)');
   textColor = input<string>('#ffffff');
   navColor = input('#000000');
@@ -397,6 +422,8 @@ export class SectionComponent {
   fullWidth = input(false, { transform: booleanAttribute });
   isVisible = input(false);
   isFolded = input(false);
+
+  hovered = signal(false);
 
   sectionIndex = input(0);
   totalSections = input(0);

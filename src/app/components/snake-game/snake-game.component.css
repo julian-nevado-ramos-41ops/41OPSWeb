@@ -64,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    width: 500px;
     margin-bottom: 20px;
 }
 
@@ -81,8 +81,8 @@
 
 .game-area {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
     border: 2px solid #333;
 }
@@ -139,4 +139,26 @@
     margin-top: 30px;
     color: #666;
     font-size: 0.9rem;
+}
+
+.bottom-image {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.bottom-image img {
+    max-width: 350px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.2)) contrast(1.1);
+}
+
+@media (max-width: 1200px) {
+    .bottom-image img {
+        max-width: 250px;
+    }
 }
