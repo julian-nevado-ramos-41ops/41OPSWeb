@@ -41,11 +41,8 @@ import { TranslationService } from '../../i18n/translation.service';
           }
         </div>
         @if (image()) {
-          <div class="section-image-container" [class.has-secondary]="secondaryImage()">
+          <div class="section-image-container">
             <img [src]="hovered() && hoverImage() ? hoverImage()! : image()!" [alt]="title()" class="section-image" [class.hoverable]="hoverImage()">
-            @if (secondaryImage()) {
-              <img [src]="secondaryImage()" [alt]="title() + ' overlay'" class="section-image-secondary">
-            }
           </div>
         }
       } @else {
@@ -294,26 +291,11 @@ import { TranslationService } from '../../i18n/translation.service';
       margin-right: -20%; /* Pull strongly to the right */
     }
 
-    .section-image-container.has-secondary {
-      position: relative;
-    }
-
     .section-image {
       max-width: 100%;
       max-height: 60vh; 
       height: auto;
       object-fit: contain;
-    }
-
-    .section-image-secondary {
-      position: absolute;
-      bottom: var(--secondary-bottom, -10%);
-      right: var(--secondary-right, -5%);
-      width: var(--secondary-width, 80%);
-      height: auto;
-      object-fit: contain;
-      z-index: 2;
-      pointer-events: none;
     }
 
     .section-mini-title {
@@ -382,10 +364,6 @@ import { TranslationService } from '../../i18n/translation.service';
         max-height: 40vh;
       }
 
-      .section-image-secondary {
-        width: var(--secondary-width-mobile, 40%);
-      }
-
       .content-slot {
         width: 100%;
       }
@@ -415,7 +393,6 @@ export class SectionComponent {
   textColor = input<string>('#ffffff');
   navColor = input('#000000');
   modalContent = input<string | undefined>();
-  secondaryImage = input<string | undefined>();
   prompt = input<string | undefined>();
   llmLinks = input<{ label: string, url: string }[] | undefined>();
   isAccordionSection = input(false, { transform: booleanAttribute });

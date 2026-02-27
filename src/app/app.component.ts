@@ -30,7 +30,6 @@ interface SectionData {
   textColor?: string;
   image?: string;
   hoverImage?: string;
-  secondaryImage?: string;
   modalContent?: string;
   prompt?: string;
   navColor?: string;
@@ -170,7 +169,6 @@ interface SectionData {
           [navColor]="section.navColor || '#000000'"
           [textColor]="section.textColor || '#ffffff'"
           [image]="section.image"
-          [secondaryImage]="section.secondaryImage"
           [modalContent]="section.modalContent"
           (requestModal)="openModal($event)"
           [totalSections]="horizontalSectionsNew().length"
@@ -209,7 +207,6 @@ interface SectionData {
           [navColor]="section.navColor || '#000000'"
           [textColor]="section.textColor || '#ffffff'"
           [image]="section.image"
-          [secondaryImage]="section.secondaryImage"
           [modalContent]="section.modalContent"
           (requestModal)="openModal($event)"
           [totalSections]="verticalSectionsUnbeatable().length"
@@ -619,7 +616,6 @@ export class AppComponent {
       backgroundColor: '#457B9D',
       textColor: '#ffffff',
       image: 'img/sections/company_departments_bubbles.png',
-      secondaryImage: 'img/sections/sticker_bot_head_jaime_AGI.png',
       modalContent: this.ts.t().aboutUsHorizontal[1].modalContent
     },
     {
@@ -629,7 +625,6 @@ export class AppComponent {
       backgroundColor: '#2A9D8F',
       textColor: '#ffffff',
       image: 'img/sections/sticker_bot_no_face_jaime (1).png',
-      secondaryImage: 'img/sections/scaffold_apple_tree.png',
       modalContent: this.ts.t().aboutUsHorizontal[2].modalContent
     }
   ]);
