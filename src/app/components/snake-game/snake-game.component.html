@@ -5,12 +5,19 @@
 
     <div class="snake-container">
         <div class="header">
-            <h1 class="title">SNAKE</h1>
+            <h1 class="title">SciTheSnake</h1>
             <div class="score">Score: {{ score }}</div>
         </div>
 
         <div class="game-area">
             <canvas #snakeBoard width="500" height="500" class="snake-canvas"></canvas>
+
+            @if (!gameStarted && !gameOver) {
+            <div class="game-over-overlay start-overlay">
+                <h2>SciTheSnake</h2>
+                <button class="restart-btn" (click)="startGame()">Play</button>
+            </div>
+            }
 
             @if (gameOver) {
             <div class="game-over-overlay">

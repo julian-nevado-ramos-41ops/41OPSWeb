@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, viewChild, ChangeDetectorRef, inject } from '@angular/core';
 
 @Component({
     selector: 'app-snake-game',
@@ -11,6 +11,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
     private ctx: CanvasRenderingContext2D | null = null;
     private intervalId: any;
+    private cdr = inject(ChangeDetectorRef);
 
     private readonly gridSize = 20;
     private readonly initialSpeed = 150;
@@ -22,6 +23,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
     public score = 0;
     public gameOver = false;
+    public gameStarted = false;
     private currentSpeed = this.initialSpeed;
     private changingDirection = false;
 
@@ -39,21 +41,35 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         const canvas = this.canvasRef()?.nativeElement;
         if (canvas) {
             this.ctx = canvas.getContext('2d');
-            this.resetGame();
+            this.snake = [
+                { x: 3 * this.gridSize, y: Math.floor((canvas.height / 2) / this.gridSize) * this.gridSize },
+                { x: 2 * this.gridSize, y: Math.floor((canvas.height / 2) / this.gridSize) * this.gridSize },
+                { x: 1 * this.gridSize, y: Math.floor((canvas.height / 2) / this.gridSize) * this.gridSize }
+            ];
+            this.clearCanvas();
+            this.drawSnake();
         }
+    }
+
+    public startGame(): void {
+        this.gameStarted = true;
+        this.resetGame();
     }
 
     public resetGame(): void {
         this.clearInterval();
+        const canvas = this.canvasRef()?.nativeElement;
+        const startY = canvas ? Math.floor((canvas.height / 2) / this.gridSize) * this.gridSize : 0;
         this.snake = [
-            { x: 3 * this.gridSize, y: 0 },
-            { x: 2 * this.gridSize, y: 0 },
-            { x: 1 * this.gridSize, y: 0 }
+            { x: 3 * this.gridSize, y: startY },
+            { x: 2 * this.gridSize, y: startY },
+            { x: 1 * this.gridSize, y: startY }
         ];
         this.dx = this.gridSize;
         this.dy = 0;
         this.score = 0;
         this.gameOver = false;
+        this.gameStarted = true;
         this.currentSpeed = this.initialSpeed;
         this.spawnFood();
         this.gameLoop();
@@ -62,6 +78,8 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
     private gameLoop(): void {
         if (this.hasGameEnded()) {
             this.gameOver = true;
+            this.gameStarted = false;
+            this.cdr.detectChanges();
             return;
         }
 
@@ -90,18 +108,101 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
             this.ctx.strokeStyle = '#333';
             this.ctx.fillRect(0, 0, canvas.width, canvas.height);
             this.ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            this.ctx.lineWidth = 1;
+            this.ctx.strokeStyle = '#222';
+            this.ctx.beginPath();
+            for (let x = 0; x <= canvas.width; x += this.gridSize) {
+                this.ctx.moveTo(x, 0);
+                this.ctx.lineTo(x, canvas.height);
+            }
+            for (let y = 0; y <= canvas.height; y += this.gridSize) {
+                this.ctx.moveTo(0, y);
+                this.ctx.lineTo(canvas.width, y);
+            }
+            this.ctx.stroke();
         }
     }
 
     private drawSnake(): void {
-        if (!this.ctx) return;
-        this.snake.forEach((part, index) => {
-            if (!this.ctx) return;
-            this.ctx.fillStyle = index === 0 ? '#0f0' : '#0c0';
-            this.ctx.strokeStyle = '#000';
-            this.ctx.fillRect(part.x, part.y, this.gridSize, this.gridSize);
-            this.ctx.strokeRect(part.x, part.y, this.gridSize, this.gridSize);
-        });
+        if (!this.ctx || this.snake.length === 0) return;
+
+        const ctx = this.ctx;
+        const halfGrid = this.gridSize / 2;
+
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = '#0c0';
+
+        for (let i = 1; i < this.snake.length; i++) {
+            const prev = this.snake[i - 1];
+            const curr = this.snake[i];
+
+            ctx.beginPath();
+            ctx.moveTo(prev.x + halfGrid, prev.y + halfGrid);
+            ctx.lineTo(curr.x + halfGrid, curr.y + halfGrid);
+
+            const progress = 1 - (i / this.snake.length);
+            const width = Math.max(2, this.gridSize * 0.8 * progress);
+            ctx.lineWidth = width;
+            ctx.stroke();
+        }
+
+        const head = this.snake[0];
+        const headX = head.x + halfGrid;
+        const headY = head.y + halfGrid;
+        const headRadius = this.gridSize * 0.5;
+
+        ctx.fillStyle = '#0f0';
+        ctx.beginPath();
+        ctx.arc(headX, headY, headRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        let eye1X = 0, eye1Y = 0;
+        let eye2X = 0, eye2Y = 0;
+        let pupilOffsetX = 0, pupilOffsetY = 0;
+
+        const eyeDist = headRadius * 0.5;
+        const eyeOffset = headRadius * 0.4;
+        const pupilShift = headRadius * 0.15;
+
+        if (this.dx > 0) {
+            eye1X = eyeDist; eye1Y = -eyeOffset;
+            eye2X = eyeDist; eye2Y = eyeOffset;
+            pupilOffsetX = pupilShift; pupilOffsetY = 0;
+        } else if (this.dx < 0) {
+            eye1X = -eyeDist; eye1Y = -eyeOffset;
+            eye2X = -eyeDist; eye2Y = eyeOffset;
+            pupilOffsetX = -pupilShift; pupilOffsetY = 0;
+        } else if (this.dy > 0) {
+            eye1X = -eyeOffset; eye1Y = eyeDist;
+            eye2X = eyeOffset; eye2Y = eyeDist;
+            pupilOffsetX = 0; pupilOffsetY = pupilShift;
+        } else if (this.dy < 0) {
+            eye1X = -eyeOffset; eye1Y = -eyeDist;
+            eye2X = eyeOffset; eye2Y = -eyeDist;
+            pupilOffsetX = 0; pupilOffsetY = -pupilShift;
+        } else {
+            eye1X = eyeDist; eye1Y = -eyeOffset;
+            eye2X = eyeDist; eye2Y = eyeOffset;
+            pupilOffsetX = pupilShift; pupilOffsetY = 0;
+        }
+
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(headX + eye1X, headY + eye1Y, headRadius * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(headX + eye2X, headY + eye2Y, headRadius * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#000';
+        ctx.beginPath();
+        ctx.arc(headX + eye1X + pupilOffsetX, headY + eye1Y + pupilOffsetY, headRadius * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(headX + eye2X + pupilOffsetX, headY + eye2Y + pupilOffsetY, headRadius * 0.15, 0, Math.PI * 2);
+        ctx.fill();
     }
 
     private advanceSnake(): void {
@@ -121,11 +222,28 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
     }
 
     private drawFood(): void {
-        if (!this.ctx) return;
-        this.ctx.fillStyle = '#f00';
-        this.ctx.strokeStyle = '#000';
-        this.ctx.fillRect(this.food.x, this.food.y, this.gridSize, this.gridSize);
-        this.ctx.strokeRect(this.food.x, this.food.y, this.gridSize, this.gridSize);
+        const ctx = this.ctx;
+        if (!ctx) return;
+
+        const halfGrid = this.gridSize / 2;
+        const centerX = this.food.x + halfGrid;
+        const centerY = this.food.y + halfGrid;
+        const radius = this.gridSize * 0.4;
+
+        ctx.fillStyle = '#f00';
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.beginPath();
+        ctx.arc(centerX - radius * 0.3, centerY - radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#0f0';
+        ctx.beginPath();
+        ctx.ellipse(centerX, centerY - radius * 0.9, radius * 0.3, radius * 0.15, Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
     }
 
     private randomTen(min: number, max: number): number {
@@ -167,7 +285,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
     @HostListener('window:keydown', ['$event'])
     handleKeyDown(event: KeyboardEvent): void {
-        if (this.changingDirection) return;
+        if (!this.gameStarted || this.changingDirection) return;
 
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(event.key)) {
             event.preventDefault();
