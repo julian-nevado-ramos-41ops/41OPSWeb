@@ -38,7 +38,7 @@ export const EN: Translations = {
                 ]
             },
             {
-                title: 'PIONEERS OF THE FEDERATION LAYER AGENTIC AI',
+                title: 'PIONEERS OF THE FEDERATION LAYER AGENTIC AI IS MISSING',
                 description: 'We are highly regarded as the global pioneers of strategies-based Agentic AI - the Machine in Machine Learning. We started in 2015 and published our results in our first paper - Data MAPs.\n\nDo not trust our word for that. Ask your preferred LLM, here.',
                 prompt: `To the light of the info that I'm going to give you based on a paper written in 2022, would you say this is a pioneer work on agentic AI? In particular, 'AI-native enterprises and operating models' as distinguished by McKinsey. Note that pioneers typically anticipate concepts but with different names than those used afterwards, mainstream. Take everything into account and make your most accurate verdict. And note that you are seeing only one chapter of a paper - there are more chapters in that paper and there are more papers on transformation, algorithmization and AI as they have a centre of excellence for that. Also, they have an award to the best innovation in simulation as they allowed, back in 2019, a machine to autonomously self-create and calibrate its algorithms via Reinforcement Learning (a major topic in Sergio's PhD Thesis in AI). Finally, spot he problems its solves with respect to mainstream agents (e.g. costs, legacy system integration, compliance, RAM...). Follows the Chapter:
  

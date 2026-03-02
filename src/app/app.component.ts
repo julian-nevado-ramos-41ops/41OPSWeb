@@ -615,7 +615,7 @@ export class AppComponent {
       subtitle: '',
       backgroundColor: '#457B9D',
       textColor: '#ffffff',
-      image: 'img/sections/company_departments_bubbles.png',
+      image: 'img/sections/Methodology.png',
       modalContent: this.ts.t().aboutUsHorizontal[1].modalContent
     },
     {
@@ -624,7 +624,7 @@ export class AppComponent {
       subtitle: '',
       backgroundColor: '#2A9D8F',
       textColor: '#ffffff',
-      image: 'img/sections/sticker_bot_no_face_jaime (1).png',
+      image: 'img/sections/Behing-the-scenes.png',
       modalContent: this.ts.t().aboutUsHorizontal[2].modalContent
     }
   ]);
