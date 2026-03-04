@@ -19,6 +19,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
 import { AccordionComponent, AccordionCardData } from './components/accordion/accordion.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
+import { NewsroomComponent } from './components/newsroom/newsroom.component';
 
 import { TranslationService } from './i18n';
 
@@ -62,6 +63,7 @@ interface SectionData {
     AccordionComponent,
     FooterComponent,
     CookieBannerComponent,
+    NewsroomComponent,
     RouterOutlet
   ],
 
@@ -222,10 +224,17 @@ interface SectionData {
       }
     </app-sections-container>
 
-    <!-- NEW: Logo Carousel -->
     <app-logo-carousel id="who-trust-us" />
 
-    <!-- NEW: Contact Us Section -->
+    <div class="newsroom-block" id="newsroom">
+      <app-newsroom 
+        [title]="ts.t().newsroom.title"
+        [seeMoreText]="ts.t().newsroom.seeMore"
+        [tableHeaders]="ts.t().newsroom.tableHeaders"
+        [news]="ts.t().newsroom.items" 
+      />
+    </div>
+
     <app-contact-us id="contact" />
 
     <app-footer />
