@@ -64,8 +64,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 500px;
-    margin-bottom: 20px;
+    width: 800px;
+    margin-bottom: 40px;
 }
 
 .title {
@@ -81,14 +81,36 @@
 
 .game-area {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 650px;
+    height: 550px;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
     border: 2px solid #333;
 }
 
+.antenna {
+    position: absolute;
+    bottom: 100%;
+    left: calc(50% - 6px);
+    width: 12px;
+    height: 180px;
+    background-color: #0f0;
+    transform-origin: bottom center;
+    border-radius: 6px;
+}
+
+.left-antenna {
+    transform: rotate(-35deg);
+}
+
+.right-antenna {
+    transform: rotate(35deg);
+    height: 250px;
+}
+
 .snake-canvas {
     display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .game-over-overlay {
@@ -143,7 +165,7 @@
 
 .bottom-image {
     margin-top: 40px;
-    display: flex;
+    display: none;
     justify-content: center;
     width: 100%;
 }

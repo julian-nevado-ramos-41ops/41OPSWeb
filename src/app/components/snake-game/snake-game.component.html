@@ -10,7 +10,9 @@
         </div>
 
         <div class="game-area">
-            <canvas #snakeBoard width="500" height="500" class="snake-canvas"></canvas>
+            <div class="antenna left-antenna"></div>
+            <div class="antenna right-antenna"></div>
+            <canvas #snakeBoard width="425" height="375" class="snake-canvas"></canvas>
 
             @if (!gameStarted && !gameOver) {
             <div class="game-over-overlay start-overlay">
