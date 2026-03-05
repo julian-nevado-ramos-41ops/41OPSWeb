@@ -273,7 +273,7 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
         const hasEatenFood = head.x === this.food.x && head.y === this.food.y;
         if (hasEatenFood) {
-            this.score += 10;
+            this.score += 1;
             this.cdr.detectChanges();
             this.prevFood = { ...this.food };
             this.foodJustEaten = true;
