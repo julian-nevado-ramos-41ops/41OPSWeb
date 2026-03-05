@@ -94,6 +94,7 @@ export interface Translations {
             name: string;
             category: string;
             project: string;
+            year?: string;
         }>;
     };
     newsroom: {

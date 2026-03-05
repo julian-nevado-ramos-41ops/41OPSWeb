@@ -526,6 +526,7 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
             { name: 'Bankig Tech Awards: Mejor Tech del Futuro: IA y Datos', category: 'Ganador', project: 'Nuestra Plataforma Fractal' },
             { name: 'CogX: Mejor Innovación en Simulación', category: 'Ganador', project: 'Núcleo de nuestra Simulación VR' },
             { name: 'Banking Tech Awards: Mejor Plataforma de Trading', category: 'Ganador', project: 'Tesis Doctoral de Sergio (UCL) en BBVA' },
+            { name: 'UK EPSRC: Impact in the Digital Economy', category: 'Ganador', project: 'Calibración de Avatares como forma de minimizar el impacto negativo de la IA en el trabajo', year: '2015' },
         ]
     },
     newsroom: {
