@@ -597,7 +597,7 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         addressLines: ['C. de Pradillo, 68', '28002 Madrid, Spain'],
     },
     footer: {
-        isoText: 'Members of both groups: AI and Web3 &amp; Metaverse',
+        isoText: 'Members of both groups: AI and Web3 & Metaverse',
     },
     cookieBanner: {
         title: 'Cookie settings',
