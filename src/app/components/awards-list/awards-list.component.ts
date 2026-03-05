@@ -129,7 +129,7 @@ interface Award {
 })
 export class AwardsListComponent {
   readonly ts = inject(TranslationService);
-  private readonly YEARS = ['2025', '2025', '2024', '2020', '2017'];
+  private readonly YEARS = ['2025', '2025', '2024', '2020', '2017', '2015'];
 
   awards = computed<Award[]>(() =>
     this.ts.t().awards.items.map((item, index) => ({
