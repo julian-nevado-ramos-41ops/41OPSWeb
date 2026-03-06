@@ -278,8 +278,8 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
             this.prevFood = { ...this.food };
             this.foodJustEaten = true;
             this.spawnFood();
-            if (this.currentSpeed > 50) {
-                this.currentSpeed -= 2;
+            if (this.currentSpeed > 70) {
+                this.currentSpeed -= 1.5;
             }
         } else {
             this.snake.pop();
