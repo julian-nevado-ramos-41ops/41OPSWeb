@@ -1,0 +1,36 @@
+<div class="runner-page-container">
+    <div class="runner-container">
+        <div class="header">
+            <h1 class="title">InfiniteRun</h1>
+            <div class="scores">
+                <span class="score">Score: {{ score }}</span>
+                <span class="high-score">Best: {{ highScore }}</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <canvas #runnerCanvas width="650" height="300" class="runner-canvas"></canvas>
+
+            @if (!gameStarted && !gameOver) {
+            <div class="game-over-overlay start-overlay">
+                <h2>InfiniteRun</h2>
+                <p class="subtitle">Jump to survive!</p>
+                <button class="restart-btn" (click)="startGame()">Play</button>
+            </div>
+            }
+
+            @if (gameOver) {
+            <div class="game-over-overlay">
+                <h2>GAME OVER</h2>
+                <p>Score: {{ score }}</p>
+                <p class="high-score-text">Best: {{ highScore }}</p>
+                <button class="restart-btn" (click)="startGame()">Restart</button>
+            </div>
+            }
+        </div>
+
+        <div class="controls-hint">
+            Press SPACE, ↑ or tap to jump
+        </div>
+    </div>
+</div>

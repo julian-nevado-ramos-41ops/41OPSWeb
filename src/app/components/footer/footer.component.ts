@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy, computed, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { TranslationService } from '../../i18n';
+import { RunnerGameComponent } from '../runner-game/runner-game.component';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
+  imports: [RunnerGameComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <footer class="footer">
@@ -14,11 +16,18 @@ import { TranslationService } from '../../i18n';
         </div>
         <div class="footer-right">
           <p class="copyright">
-            &copy; {{ currentYear() }} SciTheWorld. All rights reserved.
+            <span class="easter-egg" (click)="showGame.set(true)">&copy;</span> {{ currentYear() }} SciTheWorld. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
+
+    @if (showGame()) {
+      <div class="game-overlay" (click)="onOverlayClick($event)">
+        <button class="close-btn" (click)="showGame.set(false)">✕</button>
+        <app-runner-game />
+      </div>
+    }
   `,
   styles: [`
     :host {
@@ -67,6 +76,46 @@ import { TranslationService } from '../../i18n';
       letter-spacing: 0.02em;
     }
 
+    .easter-egg {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* ─── Fullscreen game overlay ─── */
+    .game-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background: transparent;
+      border: 1px solid #333;
+      color: #0f0;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 6px 12px;
+      font-family: 'Courier New', monospace;
+      transition: all 0.3s;
+      z-index: 10000;
+    }
+
+    .close-btn:hover {
+      background: #0f0;
+      color: #000;
+      box-shadow: 0 0 10px #0f0;
+    }
+
     @media (max-width: 768px) {
       .footer-content {
         flex-direction: column;
@@ -84,4 +133,12 @@ import { TranslationService } from '../../i18n';
 export class FooterComponent {
   readonly ts = inject(TranslationService);
   currentYear = computed(() => new Date().getFullYear());
+  showGame = signal(false);
+
+  onOverlayClick(event: MouseEvent): void {
+    // Close only if clicking the dark backdrop, not the game itself
+    if ((event.target as HTMLElement).classList.contains('game-overlay')) {
+      this.showGame.set(false);
+    }
+  }
 }
