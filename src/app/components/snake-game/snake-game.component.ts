@@ -33,7 +33,11 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
     private lastTickTime = 0;
     private tickProgress = 1;
 
+    public highScore = 0;
+    private readonly LS_KEY = 'snake_high_score';
+
     ngOnInit(): void {
+        this.highScore = this.loadHighScore();
         setTimeout(() => {
             this.initGame();
         }, 0);
@@ -112,6 +116,12 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
             if (this.hasGameEnded()) {
                 this.gameOver = true;
                 this.gameStarted = false;
+
+                if (this.score > this.highScore) {
+                    this.highScore = this.score;
+                    this.saveHighScore(this.highScore);
+                }
+
                 // Draw final frame at full progress
                 this.clearCanvas();
                 this.drawFood();
@@ -399,6 +409,22 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
         if (valid && this.inputQueue.length < 2) {
             this.inputQueue.push({ dx: newDx, dy: newDy });
+        }
+    }
+
+    private loadHighScore(): number {
+        try {
+            return parseInt(localStorage.getItem(this.LS_KEY) || '0', 10) || 0;
+        } catch {
+            return 0;
+        }
+    }
+
+    private saveHighScore(val: number): void {
+        try {
+            localStorage.setItem(this.LS_KEY, String(val));
+        } catch {
+            // storage quota or private browsing — silently ignore
         }
     }
 }

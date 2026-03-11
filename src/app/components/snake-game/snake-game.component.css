@@ -75,8 +75,24 @@
     text-shadow: 0 0 10px #0f0;
 }
 
+.scores {
+    display: flex;
+    gap: 20px;
+}
+
 .score {
     font-size: 1.5rem;
+}
+
+.high-score {
+    font-size: 1.5rem;
+    color: #0a0;
+}
+
+.high-score-text {
+    color: #0a0;
+    font-size: 1.2rem;
+    margin-bottom: 20px !important;
 }
 
 .game-area {
