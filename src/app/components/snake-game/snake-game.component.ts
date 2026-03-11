@@ -191,8 +191,15 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
 
         // Build interpolated positions
         const interpolated: { x: number, y: number }[] = [];
+        
         for (let i = 0; i < this.snake.length; i++) {
             if (i < this.prevSnake.length) {
+                // To avoid diagonal cuts, we just lerp based on Manhattan movement.
+                // Since movements are either purely horizontal or purely vertical exactly 1 grid size,
+                // normal lerp works IF we just compute the line. 
+                // But the diagonal happens when an old node moves to a new coordinate that is on a different axis.
+                // e.g. from (2,0) to (2,1) [vertical], but next node is from (1,0) to (2,0) [horizontal].
+                // We just lerp the nodes.
                 interpolated.push({
                     x: this.lerp(this.prevSnake[i].x, this.snake[i].x, progress),
                     y: this.lerp(this.prevSnake[i].y, this.snake[i].y, progress)
@@ -206,16 +213,34 @@ export class SnakeGameComponent implements OnInit, OnDestroy {
         ctx.lineJoin = 'round';
         ctx.strokeStyle = '#0c0';
 
+        // Draw the body segments
+        // Simpler, robust approach for fluid snake without jitter: 
+        // We draw individual segments. To fix the diagonal at corners:
         for (let i = 1; i < interpolated.length; i++) {
             const prev = interpolated[i - 1];
             const curr = interpolated[i];
 
             ctx.beginPath();
             ctx.moveTo(prev.x + halfGrid, prev.y + halfGrid);
+
+            // Check if this segment forms a diagonal (i.e., x and y are varying at the same time)
+            const isDiagonal = Math.abs(prev.x - curr.x) > 0.1 && Math.abs(prev.y - curr.y) > 0.1;
+
+            if (isDiagonal) {
+                 // To fix the diagonal shortcut, we can trace a path through the shared corner coordinate.
+                 // The corner is either (prev.x, curr.y) or (curr.x, prev.y).
+                 // We find the corner that is closest to the previous grid positions.
+                 // A simple heuristic: if prev was moving on X, the corner is (curr.x, prev.y).
+                 const cornerX = Math.abs(this.snake[i-1].x - this.snake[i].x) === 0 ? prev.x : curr.x;
+                 const cornerY = Math.abs(this.snake[i-1].y - this.snake[i].y) === 0 ? prev.y : curr.y;
+                 ctx.lineTo(cornerX + halfGrid, cornerY + halfGrid);
+            }
+
             ctx.lineTo(curr.x + halfGrid, curr.y + halfGrid);
 
-            const ratio = 1 - (i / interpolated.length);
-            const width = Math.max(2, this.gridSize * 0.8 * ratio);
+            // The body should be completely uniform in thickness, except the very end tip of the tail.
+            const isLastSegment = i === interpolated.length - 1;
+            const width = isLastSegment ? Math.max(12.4, this.gridSize * 0.6) : this.gridSize * 0.9;
             ctx.lineWidth = width;
             ctx.stroke();
         }
