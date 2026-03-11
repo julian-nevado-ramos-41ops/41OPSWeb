@@ -221,6 +221,28 @@ export class RunnerGameComponent implements OnInit, OnDestroy {
     private drawPlayer(ctx: CanvasRenderingContext2D): void {
         const p = this.player;
 
+        // Antennas
+        ctx.strokeStyle = '#0f0';
+        ctx.lineWidth = 2;
+        
+        ctx.beginPath();
+        // Left antenna
+        ctx.moveTo(p.x + p.width / 2, p.y);
+        ctx.lineTo(p.x + p.width / 2 - 8, p.y - 12);
+        // Right antenna
+        ctx.moveTo(p.x + p.width / 2, p.y);
+        ctx.lineTo(p.x + p.width / 2 + 8, p.y - 12);
+        ctx.stroke();
+
+        // Antenna tips
+        ctx.fillStyle = '#0f0';
+        ctx.beginPath();
+        ctx.arc(p.x + p.width / 2 - 8, p.y - 12, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x + p.width / 2 + 8, p.y - 12, 2, 0, Math.PI * 2);
+        ctx.fill();
+
         // Body — glowing green block
         ctx.shadowColor = '#0f0';
         ctx.shadowBlur = 8;
