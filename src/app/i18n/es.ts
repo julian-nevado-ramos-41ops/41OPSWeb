@@ -541,6 +541,14 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
         },
         items: [
             {
+                date: '2026/03/23',
+                company: '41OPS',
+                title: 'Hoja de Ruta para la Transformación de las Pymes',
+                summary: 'Cómo ayudamos a las pymes a seguir el estado del arte al menor coste: desde el uso compartido de infraestructura hasta la dedicación completa y la federación de PI.',
+                howAiSeesUs: "https://claude.ai/public/artifacts/763b80a6-0018-4c9d-b55e-2504ed206474"
+            },
+
+            {
                 date: '2026/03/05',
                 company: '41OPS',
                 title: 'El SO de las empresas algorítmicas',
