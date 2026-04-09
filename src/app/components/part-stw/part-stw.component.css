@@ -95,11 +95,17 @@
     opacity: 0.6;
 }
 
-/* ::ng-deep .part-stw-conclusion {
+::ng-deep .part-stw-conclusion {
     display: block;
     margin-top: 1.5rem;
     opacity: 0.85;
-} */
+}
+
+::ng-deep .part-stw-extension {
+    font-size: 0.85em;
+    margin-top: 0.5rem;
+    opacity: 0.95;
+}
 
 @media (max-width: 900px) {
     .content-wrapper {

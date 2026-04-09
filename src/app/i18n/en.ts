@@ -15,7 +15,7 @@ export const EN: Translations = {
     },
     partStw: {
         titleHtml: 'Part of <u>SciTheWorld</u>',
-        description: 'We are the transformation execution arm at SciTheWorld:\n1. We translate Algorithmization theory into deep technology infrastructure.\n2. And then we onboard the technology at companies of all kinds so that they can absorb AI at ease. What does it mean? Depending on the project\'s nature, we are:<ul class="part-stw-list"><li><b>When top-down</b>: your C-Suite Consultancy but upon bottom-up executable tech instead of Powerpoint.</li><li><b>When bottom-up</b>: your tech consultancy but Custom SaaS instead of old school projects.</li></ul><span class="part-stw-conclusion">And then, you can interconnect those projects within your company (departments and legacies up to your own algo-native OS) or with partners (unlocking trust upon novel auditability).</span>',
+        description: 'We are the transformation execution arm at SciTheWorld:\n1. We translate Algorithmization theory into deep technology infrastructure.\n2. And then we onboard the technology at companies of all kinds so that they can absorb AI at ease. <div class="part-stw-extension">What does it mean? Depending on the project\'s nature, we are:<ul class="part-stw-list"><li>When top-down: your C-Suite Consultancy but upon bottom-up executable tech instead of Powerpoint.</li><li>When bottom-up: your tech consultancy but Custom SaaS instead of old school projects.</li></ul><span class="part-stw-conclusion">And then, you can interconnect those projects within your company (departments and legacies up to your own algo-native OS) or with partners (unlocking trust upon novel auditability).</span></div>',
     },
     highlights: {
         sectionTitle: 'HIGHLIGHTS',
