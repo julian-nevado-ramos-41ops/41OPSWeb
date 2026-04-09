@@ -74,6 +74,33 @@
     margin-bottom: 0.5rem;
 }
 
+::ng-deep .part-stw-list {
+    margin: 1rem 0 1rem 2rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    list-style-type: none;
+}
+
+::ng-deep .part-stw-list li {
+    position: relative;
+    padding-left: 1rem;
+}
+
+::ng-deep .part-stw-list li::before {
+    content: "—";
+    position: absolute;
+    left: -1rem;
+    opacity: 0.6;
+}
+
+/* ::ng-deep .part-stw-conclusion {
+    display: block;
+    margin-top: 1.5rem;
+    opacity: 0.85;
+} */
+
 @media (max-width: 900px) {
     .content-wrapper {
         flex-direction: column;
