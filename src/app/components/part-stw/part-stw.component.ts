@@ -17,24 +17,8 @@ export class PartStwComponent {
     /** Description text displayed on the right column */
     description = input.required<string>();
 
-    descriptionHtml = computed(() => {
-        const desc = this.description();
-        const lines = desc.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    descriptionHtml = computed(() => this.description());
 
-        if (lines.length === 0) return '';
-
-        const intro = lines[0];
-        const points = lines.slice(1);
-
-        if (points.length === 0) return `<div class="intro">${intro}</div>`;
-
-        return `
-            <div class="intro">${intro}</div>
-            <div class="points-container">
-                ${points.map(p => `<div class="point-item">${p}</div>`).join('')}
-            </div>
-        `;
-    });
 
     // Customization Inputs
     backgroundColor = input<string>('#F3F1E7'); // Light beige default

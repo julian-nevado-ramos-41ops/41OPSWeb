@@ -5,6 +5,7 @@ export interface Translations {
         awards: string;
         whoTrustUs: string;
         theGroup: string;
+        joinUs?: string;
         contact: string;
     };
     hero: {
@@ -154,5 +155,21 @@ export interface Translations {
     };
     common: {
         seeMore: string;
+    };
+    joinUs: {
+        title: string;
+        subtitle: string;
+        description: string;
+        viewMore: string;
+        applyLinkedIn: string;
+        close: string;
+        jobOffers: Array<{
+            position: string;
+            location: string;
+            requiredSkills: string[];
+            extraSkills: string[];
+            description: string;
+            linkedInUrl: string;
+        }>;
     };
 }

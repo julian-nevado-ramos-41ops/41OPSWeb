@@ -16,10 +16,11 @@ import { HudOverlayComponent } from './components/hud-overlay/hud-overlay.compon
 
 import { CollapsibleListComponent, CollapsibleItem } from './components/collapsible-list/collapsible-list.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { AccordionComponent, AccordionCardData } from './components/accordion/accordion.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CookieBannerComponent } from './components/cookie-banner/cookie-banner.component';
 import { NewsroomComponent } from './components/newsroom/newsroom.component';
+import { JoinUsComponent } from './components/join-us/join-us.component';
+import { AccordionComponent, AccordionCardData } from './components/accordion/accordion.component';
 
 import { TranslationService } from './i18n';
 
@@ -64,6 +65,7 @@ interface SectionData {
     FooterComponent,
     CookieBannerComponent,
     NewsroomComponent,
+    JoinUsComponent,
     RouterOutlet
   ],
 
@@ -235,6 +237,17 @@ interface SectionData {
       />
     </div>
 
+    <div class="join-us-block" id="join-us">
+      <app-join-us
+        [title]="ts.t().joinUs.title"
+        [description]="ts.t().joinUs.description"
+        [jobOffers]="ts.t().joinUs.jobOffers"
+        [viewMoreLabel]="ts.t().joinUs.viewMore"
+        [applyLinkedInLabel]="ts.t().joinUs.applyLinkedIn"
+        [closeLabel]="ts.t().joinUs.close"
+      />
+    </div>
+
     <app-contact-us id="contact" />
 
     <app-footer />
@@ -303,6 +316,16 @@ interface SectionData {
     }
 
     .kpis-block {
+      width: 100%;
+      scroll-snap-align: start;
+    }
+
+    .newsroom-block {
+      width: 100%;
+      scroll-snap-align: start;
+    }
+
+    .join-us-block {
       width: 100%;
       scroll-snap-align: start;
     }
@@ -587,6 +610,7 @@ export class AppComponent {
     { label: this.ts.t().navBar.aboutUs, link: '#about-us' },
     { label: this.ts.t().navBar.awards, link: '#awards' },
     { label: this.ts.t().navBar.whoTrustUs, link: '#who-trust-us' },
+    { label: this.ts.t().navBar.joinUs || 'JOIN US', link: '#join-us' },
     {
       label: this.ts.t().navBar.theGroup, children: [
         { label: 'SciTheWorld', link: 'https://scitheworld.com' },

@@ -7,6 +7,7 @@ export const ES: Translations = {
         awards: 'PREMIOS',
         whoTrustUs: 'QUIÉN CONFÍA',
         theGroup: 'EL GRUPO',
+        joinUs: 'ÚNETE',
         contact: 'CONTACTO',
     },
     hero: {
@@ -15,7 +16,7 @@ export const ES: Translations = {
     },
     partStw: {
         titleHtml: 'Parte de <u>SciTheWorld</u>',
-        description: 'Somos el brazo de ejecución de transformación en SciTheWorld:\n1. Traducimos la teoría de Algorithmization en infraestructura tecnológica profunda.\n2. Y luego integramos la tecnología en todo tipo de empresas para que puedan absorber IA con facilidad. <div class="part-stw-extension">¿Qué significa esto? Dependiendo de la naturaleza del proyecto, somos:<ul class="part-stw-list"><li>A nivel estratégico (top-down), somos una consultoría para la alta dirección, pero basada en tecnología real y ejecutable desde la base, en lugar de en simples PowerPoints.</li><li>A nivel operativo (bottom-up), somos una consultoría tecnológica, pero enfocada en crear SaaS a medida en lugar de los clásicos proyectos de la vieja escuela.</li></ul><span class="part-stw-conclusion">El resultado: la capacidad de interconectar estas soluciones dentro de tu propia empresa (integrando departamentos y sistemas heredados hasta formar tu propio sistema operativo algorítmico) o con socios (desbloqueando un nuevo nivel de confianza gracias a una auditabilidad sin precedentes).</span></div>',
+        description: 'Somos el brazo de ejecución de transformación en SciTheWorld:\n1. Traducimos la teoría de Algorithmization en infraestructura tecnológica profunda.\n2. Y luego integramos la tecnología en todo tipo de empresas para que puedan absorber IA con facilidad.\n\n<div class="part-stw-extension">¿Qué significa esto? Dependiendo de la naturaleza del proyecto, somos:\n\n– A nivel estratégico (top-down), somos una consultoría para la alta dirección, pero basada en tecnología real y ejecutable desde la base, en lugar de en simples PowerPoints.\n– A nivel operativo (bottom-up), somos una consultoría tecnológica, pero enfocada en crear SaaS a medida en lugar de los clásicos proyectos de la vieja escuela.\n\nEl resultado: la capacidad de interconectar estas soluciones dentro de tu propia empresa (integrando departamentos y sistemas heredados hasta formar tu propio sistema operativo algorítmico) o con socios (desbloqueando un nuevo nivel de confianza gracias a una auditabilidad sin precedentes).</div>',
     },
     highlights: {
         sectionTitle: 'HIGHLIGHTS',
@@ -655,5 +656,63 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
     },
     common: {
         seeMore: 'Saber más'
+    },
+    joinUs: {
+        title: 'ÚNETE A NOSOTROS',
+        subtitle: 'Buscamos candidato junior o mid',
+        description: `
+<p>Somos un equipo pequeño, muy respetado a nivel internacional — banca de inversión, hedge funds, gestoras, bancos centrales, energéticas, fondos soberanos, órganos supranacionales...</p>
+<p>Escogemos aptitud y, muy importante, actitud. Buscamos personas inteligentes y humildes con ganas de trabajar duro en equipo en un campo apasionante.</p>
+<p>También buscamos crecer más en tech que en personas. Nuestro KPI principal es: <strong>tech/persona</strong>.</p>
+        `,
+        viewMore: 'Ver más',
+        applyLinkedIn: 'Aplicar en LinkedIn',
+        close: 'Cerrar',
+        jobOffers: [
+            {
+                position: 'Ingeniero de Datos',
+                location: 'Madrid, España',
+                requiredSkills: ['Python', 'Spark/PySpark', 'AWS/Google Cloud', 'MongoDB', 'OOP'],
+                extraSkills: ['Django', 'D3.js', 'Angular', 'RabbitMQ/Kafka', 'ML', 'Econometrics'],
+                description: `
+<h3>Sobre el puesto</h3>
+<p>Buscamos candidato junior o mid para unirse al grupo SciTheWorld a través de su brazo de consultoría tecnológica: 41OPS.</p>
+
+<h3>Lo que necesitas</h3>
+<ul>
+<li><strong>Python fluency</strong> — esencial para todo nuestro stack</li>
+<li><strong>Spark/PySpark</strong> — para procesamiento de datos a escala</li>
+<li><strong>AWS/Google Cloud</strong> — infraestructura cloud</li>
+<li><strong>MongoDB</strong> — base de datos NoSQL</li>
+<li><strong>Object Oriented Programming</strong> — Pattern Oriented Programming (POP), como Data MAPs, es un plus</li>
+</ul>
+
+<h3>Buenos extras</h3>
+<ul>
+<li>Django, D3.js</li>
+<li>Angular</li>
+<li>Apps development (web, mobile)</li>
+<li>RabbitMQ / Kafka</li>
+<li>ML standards</li>
+<li>Advanced Econometrics & Time Series Analysis</li>
+<li>Entender mercados (equities, fixed income, commodities, FX and/or crypto)</li>
+</ul>
+
+<h3>Lo que ofrecemos</h3>
+<p><strong>Proyectos Internos/SciTheWorld:</strong> exposición al estado del arte en tecnología algorítmica y proyectos muy innovadores.</p>
+<p><strong>Proyectos Externos:</strong> exposición a clientes de primer nivel y su stack tecnológico. Representa una oportunidad de demostrar tus habilidades expandiéndote dentro de ellos (desde asumiendo labores de desarrollador hasta project manager o ventas).</p>
+
+<h3>Condiciones</h3>
+<ul>
+<li><strong>Ubicación:</strong> En nuestras oficinas de Madrid</li>
+<li><strong>Modalidad:</strong> En "Proyectos Externos" a menudo hacemos 2 días en la oficina y el resto en remoto — siempre que el cliente lo permita</li>
+<li><strong>Contacto:</strong> Envía tu vitae a hello@41ops.com</li>
+</ul>
+
+<p><em>Carta de presentación permitida pero directa al grano (1/2 página aprox). Subject: Puesto al que aplicas / Número de años de experiencia.</em></p>
+                `,
+                linkedInUrl: 'https://www.linkedin.com/jobs/view/4400376754'
+            }
+        ]
     },
 };

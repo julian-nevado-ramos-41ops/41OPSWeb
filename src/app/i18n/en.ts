@@ -7,6 +7,7 @@ export const EN: Translations = {
         awards: 'AWARDS',
         whoTrustUs: 'WHO TRUST US',
         theGroup: 'THE GROUP',
+        joinUs: 'JOIN US',
         contact: 'CONTACT',
     },
     hero: {
@@ -15,7 +16,7 @@ export const EN: Translations = {
     },
     partStw: {
         titleHtml: 'Part of <u>SciTheWorld</u>',
-        description: 'We are the transformation execution arm at SciTheWorld:\n1. We translate Algorithmization theory into deep technology infrastructure.\n2. And then we onboard the technology at companies of all kinds so that they can absorb AI at ease. <div class="part-stw-extension">What does it mean? Depending on the project\'s nature, we are:<ul class="part-stw-list"><li>When top-down: your C-Suite Consultancy but upon bottom-up executable tech instead of Powerpoint.</li><li>When bottom-up: your tech consultancy but Custom SaaS instead of old school projects.</li></ul><span class="part-stw-conclusion">And then, you can interconnect those projects within your company (departments and legacies up to your own algo-native OS) or with partners (unlocking trust upon novel auditability).</span></div>',
+        description: 'We are the transformation execution arm at SciTheWorld:\n1. We translate Algorithmization theory into deep technology infrastructure.\n2. And then we onboard the technology at companies of all kinds so that they can absorb AI at ease.\n\n<div class="part-stw-extension">What does it mean? Depending on the project\'s nature, we are:\n\n– When top-down: your C-Suite Consultancy but upon bottom-up executable tech instead of Powerpoint.\n– When bottom-up: your tech consultancy but Custom SaaS instead of old school projects.\n\nAnd then, you can interconnect those projects within your company (departments and legacies up to your own algo-native OS) or with partners (unlocking trust upon novel auditability).</div>',
     },
     highlights: {
         sectionTitle: 'HIGHLIGHTS',
@@ -640,5 +641,63 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
     },
     common: {
         seeMore: 'See more'
+    },
+    joinUs: {
+        title: 'JOIN US',
+        subtitle: 'We are looking for junior or mid-level candidates',
+        description: `
+<p>We are a small team, highly respected internationally — investment banking, hedge funds, asset managers, central banks, energy companies, sovereign funds, supranational organizations...</p>
+<p>We choose aptitude and, very importantly, attitude. We look for intelligent and humble people willing to work hard as a team in an exciting field.</p>
+<p>We also aim to grow more in tech than in people. Our main KPI is: <strong>tech/persona</strong>.</p>
+        `,
+        viewMore: 'View more',
+        applyLinkedIn: 'Apply on LinkedIn',
+        close: 'Close',
+        jobOffers: [
+            {
+                position: 'Data Engineer',
+                location: 'Madrid, Spain',
+                requiredSkills: ['Python', 'Spark/PySpark', 'AWS/Google Cloud', 'MongoDB', 'OOP'],
+                extraSkills: ['Django', 'D3.js', 'Angular', 'RabbitMQ/Kafka', 'ML'],
+                description: `
+<h3>About the role</h3>
+<p>We are looking for a junior or mid-level candidate to join the SciTheWorld group through its technology consulting arm: 41OPS.</p>
+
+<h3>What you need</h3>
+<ul>
+<li><strong>Python fluency</strong> — essential for our entire stack</li>
+<li><strong>Spark/PySpark</strong> — for large-scale data processing</li>
+<li><strong>AWS/Google Cloud</strong> — cloud infrastructure</li>
+<li><strong>MongoDB</strong> — NoSQL database</li>
+<li><strong>Object Oriented Programming</strong> — Pattern Oriented Programming (POP), like Data MAPs, is a plus</li>
+</ul>
+
+<h3>Nice to have</h3>
+<ul>
+<li>Django, D3.js</li>
+<li>Angular</li>
+<li>Apps development (web, mobile)</li>
+<li>RabbitMQ / Kafka</li>
+<li>ML standards</li>
+<li>Advanced Econometrics & Time Series Analysis</li>
+<li>Understanding of markets (equities, fixed income, commodities, FX and/or crypto)</li>
+</ul>
+
+<h3>What we offer</h3>
+<p><strong>Internal Projects/SciTheWorld:</strong> exposure to cutting-edge algorithmic technology and very innovative projects.</p>
+<p><strong>External Projects:</strong> exposure to first-level clients and their tech stack. This is an opportunity to demonstrate your skills by expanding within them (from developer to project manager or sales).</p>
+
+<h3>Conditions</h3>
+<ul>
+<li><strong>Location:</strong> At our offices in Madrid</li>
+<li><strong>Modalities:</strong> For "External Projects" we often do 2 days in office and the rest remote — always as the client allows</li>
+<li><strong>Contact:</strong> Send your CV to hello@41ops.com</li>
+</ul>
+
+<p><em>Cover letter allowed but direct and to the point (approx. 1/2 page). Subject: Position you are applying for / Number of years of experience.</em></p>
+                `,
+                linkedInUrl: 'https://www.linkedin.com/jobs/search/?currentJobId=1&origin=GOOGLE_CLOUD'
+            }
+        ]
     },
 };
