@@ -651,7 +651,6 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
 <p>We also aim to grow more in tech than in people. Our main KPI is: <strong>tech/persona</strong>.</p>
         `,
         viewMore: 'View more',
-        applyLinkedIn: 'Apply on LinkedIn',
         close: 'Close',
         jobOffers: [
             {
@@ -696,7 +695,6 @@ Data MAPs Algorithmization requires an optimal weighting between business and te
 
 <p><em>Cover letter allowed but direct and to the point (approx. 1/2 page). Subject: Position you are applying for / Number of years of experience.</em></p>
                 `,
-                linkedInUrl: 'https://www.linkedin.com/jobs/view/4400376754'
             }
         ]
     },

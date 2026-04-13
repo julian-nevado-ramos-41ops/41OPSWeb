@@ -161,7 +161,6 @@ export interface Translations {
         subtitle: string;
         description: string;
         viewMore: string;
-        applyLinkedIn: string;
         close: string;
         jobOffers: Array<{
             position: string;
@@ -169,7 +168,6 @@ export interface Translations {
             requiredSkills: string[];
             extraSkills: string[];
             description: string;
-            linkedInUrl: string;
         }>;
     };
 }
