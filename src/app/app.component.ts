@@ -243,7 +243,6 @@ interface SectionData {
         [description]="ts.t().joinUs.description"
         [jobOffers]="ts.t().joinUs.jobOffers"
         [viewMoreLabel]="ts.t().joinUs.viewMore"
-        [applyLinkedInLabel]="ts.t().joinUs.applyLinkedIn"
         [closeLabel]="ts.t().joinUs.close"
       />
     </div>
